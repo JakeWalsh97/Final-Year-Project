@@ -22,8 +22,8 @@ public class SmsMessageController {
         this.smsMessageRepository = smsMessageRepository;
     }
 
-    public static final String ACCOUNT_SID = "ACcf98df9b77bc8868c6bff6d34a20b0b2";
-    public static final String AUTH_TOKEN = "d98d003674b88128b76409b8fcb61cd5";
+    public static final String ACCOUNT_SID = "";
+    public static final String AUTH_TOKEN = "";
 
     @Autowired
     SmsMessageRepository smsMessageRepository;
