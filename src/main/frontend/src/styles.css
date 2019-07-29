@@ -1,0 +1,248 @@
+/* body {
+    width: 100%;
+    background-color: white;
+    position: relative;
+    width: 100%;
+    min-height: auto;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    background-position: center;
+    text-align: center;
+  }
+  
+  .intro {
+    color: black; 
+    border-top: .4em solid black;
+    border-bottom: .4em solid black;
+    padding: 5em; 
+    background-image: url('src/img/venom_wallpaper.jpg'); 
+    position: relative;
+    width: 100%;
+    min-height: auto;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    background-position: center;
+    text-align: center;
+  }
+  
+  .navbar-default {
+    border-bottom: .4em solid black;
+    position: relative;
+    width: 99.2%;
+    min-height: auto;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    background-position: center;
+    text-align: center;
+    margin-left: .5em;
+    padding-bottom: 2em;
+  }
+  
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 75%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 4px;
+    border: .10em solid black;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+  
+  tr:nth-child(odd) {
+    background-color: white;
+  }
+  
+  .description {
+    font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
+    width: 50em;
+    text-align: center;
+  }
+  
+  .title {
+    font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
+    width: 50em;
+    text-align: center;
+  }
+  
+  .genericData {
+    font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
+    width: 70em;
+    text-align: center;
+  }
+  
+  .dataFont {
+    font-size: 1.25em;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    border: .10em solid black;
+    text-align: center;
+    padding: 2em;
+  }
+  
+  .description {
+    margin:1em;
+    padding: 1em;
+    width:30em;
+  }
+  
+  .dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    margin-right: 1em;
+    margin-top: .75em;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #ddd;
+    text-decoration: underline;
+  }
+  
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  .dropdown:hover .dropbtn {background-color: #3e8e41;}
+  
+  #overview {
+    border:.10em solid white;
+    background-color: #38231A;
+    padding: 1em;
+  }
+  
+  .page-scroll {
+    text-decoration: dotted;
+  }
+  
+  .walshHeader {
+    position: relative;
+    width: 100%;
+    min-height: auto;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    background-position: center;
+    text-align: center;
+    border-bottom: .2em solid black;
+  }
+  
+  #about {
+    border-top:.4em solid white;
+    position: relative;
+    width: 100%;
+    min-height: auto;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    background-position: center;
+    text-align: center;
+    background-image: url('../img/overview.jpg');
+  }
+  
+  #services {
+    border-top:.4em solid white;
+    position: relative;
+    width: 100%;
+    min-height: auto;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    background-position: center;
+    text-align: center;
+    background-image: url('../img/service.jpeg');
+    padding-bottom:12em;
+    border-bottom:.4em solid white;
+  }
+  
+  .servicesTitles {
+    color:white;
+  }
+  
+  .text-muted {
+    padding-top:.5em;
+    padding-bottom:.5em;
+    border-top:.10em solid white;
+    border-bottom:.10em solid white;
+  }
+  
+  .service-box {
+    border: .15em solid white;
+    padding:1em;
+    background-color:black;
+  }
+  
+  .col-sm-6 {
+    border: .15em solid white;
+  }
+  
+  #char {
+    position: relative;
+    width: 100%;
+    min-height: auto;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    background-position: center;
+    text-align: center;
+    background-image: url('../img/characters.jpg');
+    padding-bottom:5em;
+    padding-top:7em;
+  }
+  
+  #names {
+    color:#38231A;
+    font-size:1.8em;
+  }
+  
+  #contact {
+    border-top:.4em solid white;
+    position: relative;
+    width: 100%;
+    min-height: auto;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    background-position: center;
+    text-align: center;
+    background-image: url('../img/footer.jpg');
+  }
+  
+   */

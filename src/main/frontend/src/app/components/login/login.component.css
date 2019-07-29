@@ -1,0 +1,59 @@
+#welcome {
+    padding-top: 5em;
+    border-bottom: .4em solid gainsboro;
+    position: relative;
+    width: 100%;
+    min-height: auto;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    background-position: center;
+    text-align: center;
+    background-image: url('../../../img/spectreWallpaper.jpg');
+    height: 68.5em;
+}
+
+.welcomeTitle {
+    font-size: 3.5em;
+    text-shadow: 5px 5px black;
+    color: white;
+}
+
+.contactTitle {
+    color: black;
+    font-size: 2.5em;
+    text-align: center;
+    padding-bottom: .5em;
+  }
+
+  .contactImg {
+    border: .10em solid black;
+    padding-bottom: 1.25em;
+  }
+
+  .signUpImg {
+    border: .10em solid black;
+    height: 282px;
+    width: 500px;
+  }
+
+  .loginForm {
+    border: .10em solid black;
+    padding: 1em;
+    background-color: gainsboro;
+  }
+
+  #loginPanel {
+    background-color: white;
+    border-bottom: .25em solid black;
+  }
+
+  #loginTitle {
+    color: white; 
+    text-shadow: 3px 3px black; 
+    padding-bottom: 1em; 
+    padding-top: 1em; 
+    border-top: .10em solid black; 
+    border-bottom: .10em solid black;
+  }

@@ -1,0 +1,5 @@
+{
+    "git.ignoreLimitWarning": true,
+    "appService.defaultWebAppToDeploy": "/subscriptions/fde64989-7697-47a2-ab2b-d45194976825/resourceGroups/movieDB-Backend/providers/Microsoft.Web/sites/movieDB-frontend",
+    "appService.deploySubpath": ""
+}

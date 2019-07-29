@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="src/favicon.ico">
+
+    <title>Movie Database Web Application</title>
+    <base href="/">
+    <!-- <link href="../css/app.component.css" rel="stylesheet"> -->
+</head>
+<body>
+    <section id="welcome">
+      <h1 class="welcomeTitle"><b>Walsh Movie Database</b></h1>
+      <div class="card mt-5" style="margin:auto;width: 400px;">
+        <div class="card-body">
+          <h2 class="card-title" id="loginTitle"><b>Login</b></h2>
+          <div class="loginForm">
+          <div class="form-group">
+            <label for="email"><b>Username</b></label>
+            <input type="text" class="form-control" id="email" placeholder="Username" [(ngModel)]="username">
+          </div>
+          <div class="form-group">
+            <label for="email"><b>Password</b></label>
+            <input type="password" class="form-control" id="password" placeholder="Password" [(ngModel)]="password">
+          </div>
+          <button type="submit" class="btn btn-primary" (click)="tryLogin(username, password)">Login</button>
+          <br><br>
+          <div *ngIf="isValid == false"><span style="display: inline-block; border: .10em solid black; background-color: white; padding: .5em">
+            <h4 style="color: red">Invalid Username or Password</h4></span></div><br>
+          <div *ngIf="accountExists == false"><span style="display: inline-block; border: .10em solid black; background-color: white; padding: .5em">
+            <h4 style="color: red">Account with the username <b style="color:black">{{username}}</b> does not exist</h4></span></div>
+        </div>
+      </div>
+      </div>
+
+      <br>
+    <div class="container" style="margin:auto;width: 450px; margin-top: 1em;">
+            <a routerLink="/"><button class="btn-warning"><h2><b>Return to Home</b></h2></button></a>
+        </div>
+    </section>
+    </body>
+</html>

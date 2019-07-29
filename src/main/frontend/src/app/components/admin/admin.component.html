@@ -1,0 +1,84 @@
+<div class="title">
+<h1 class="adminTitle"><b>Admin Site - Walsh Movie Database</b></h1>
+</div>
+
+<div class="container">
+  <h2 class="allUsersTitle"><b>All Users</b></h2>
+    <table class="table" id="usersTable">
+        <thead class="tableHead">
+          <th class="tableTitle"><b>Id</b></th>
+          <th class="tableTitle"><b>Username</b></th>
+          <th class="tableTitle"><b>Operations</b></th>
+        </thead>
+      
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td class="userData">{{user.id}}</td>
+            <td class="userData">{{user.username}}</td>
+            <td class="userData"><button class="btn btn-danger" (click)="deleteUser(user)">Delete</button>
+          </tr>
+        </tbody>
+      </table>
+</div>
+
+<div class="container">
+    <h2 class="allReviewsTitle"><b>All Reviews</b></h2>
+      <table class="table" id="usersTable">
+          <thead class="tableHead">
+            <th class="tableTitle">Id</th>
+            <th class="tableTitle">Movie</th>
+            <th class="tableTitle">Username</th>
+            <th class="tableTitle">Review</th>
+            <th class="tableTitle">Date</th>
+            <th class="tableTitle">Operations</th>
+          </thead>
+        
+          <tbody>
+            <tr *ngFor="let rev of reviews">
+              <td class="userData">{{rev.id}}</td>
+              <td class="userData">{{rev.movie_name}}</td>
+              <td class="userData">{{rev.username}}</td>
+              <td class="userData">{{rev.reviewText}}</td>
+              <td class="userData">{{rev.reviewDate}}</td>
+              <td class="userData"><button class="btn btn-danger" (click)="deleteReview(rev)">Delete</button>
+            </tr>
+          </tbody>
+        </table>
+  </div>
+
+  <div class="container">
+    <h2 class="allQueriesTable"><b>All Queries</b></h2>
+    <table class="table" id="queriesTable">
+      <thead class="tableHead">
+        <th class="tableTitle">Id</th>
+        <th class="tableTitle">Username</th>
+        <th class="tableTitle">Query Title</th>
+        <th class="tableTitle">Query</th>
+        <th class="tableTitle">Query Date</th>
+        <th class="tableTitle">Address Query</th>
+        <th class="tableTitle">Operations</th>
+      </thead>
+    
+      <tbody>
+        <tr *ngFor="let que of queries">
+          <td class="userData">{{que.id}}</td>
+          <td class="userData">{{que.username}}</td>
+          <td class="userData">{{que.queryTitle}}</td>
+          <td class="userData">{{que.query}}</td>
+          <td class="userData">{{que.queryDate}}</td>
+          <td class="userData">
+            <h3 style="color:red; text-align:center"><b>Address Query</b></h3>
+            <textarea type="text" [(ngModel)]="responseText" rows="5" cols="50" style="width: 40%; float:center" placeholder="Response (Max 250 Words)"></textarea><br>
+            <button class="btn btn-danger" style="margin-top: 1.5em" (click)="addressQuery(que, responseText)">Respond to Query</button></td>
+          <td class="userData"><button class="btn btn-danger" (click)="deleteQuery(que)">Delete</button>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="container">
+      <h2 class="optionsTitle"><b>Other Options</b></h2>
+    <a href="/"><button class="btn-success" id="optionsButtons">Return to Home</button></a>
+    <a href="/"><button class="btn-warning" id="optionsButtons" style="margin-left: 2em">Logout</button></a>
+    <a href="/admin"><button class="btn-danger" id="optionsButtons" style=" margin-left: 2em">Refresh Data</button></a>
+  </div>

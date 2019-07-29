@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="src/img/favicon.png">
+
+    <title>Movie Database Web Application</title>
+    <base href="/">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="src/favicon.ico">
+</head>
+
+<body>
+        <nav class="main-navigation navbar-fixed-top">
+            <div class="navbar-header" style="border-right: .10em solid black; margin-top: 1em">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#myNavbar">
+                            <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                        </button>
+                        <button class="btn btn-default" style="margin-top: 1em; margin-right: 3em; margin-left: 5em"><a href="/"><b style="color: black; font-size: 1.5em">Home</b></a></button>
+                    </div>
+                <ul class="nav navbar-nav navbar-left" id="home">
+                    <li style="border-right: .10em solid black; margin-top: 1em; margin-left: 2em">
+                            <div class="dropdown" style="padding-bottom:1em">
+                        <button class="btn btn-basic" style="margin-top: 1em; background-color:black" (click)="mostPopularMovies()"><b style="color: white; font-size: 1.5em">Most Popular Movies</b></button>
+                        <div class="dropdown-content" style="float:right">
+                                <a href="/#resultsTable" (click)="mostPopularMoviesInEnglish()" style="font-size: 1.25em; font-family:Arial, Helvetica, sans-serif">English</a>
+                                <a href="/#resultsTable" (click)="mostPopularMoviesInFrench()" style="font-size: 1.25em; font-family:Arial, Helvetica, sans-serif">French</a>
+                                <a href="/#resultsTable" (click)="mostPopularMoviesInGerman()" style="font-size: 1.25em; font-family:Arial, Helvetica, sans-serif">German</a>
+                                <a href="/#resultsTable" (click)="mostPopularMoviesInSpanish()" style="font-size: 1.25em; font-family:Arial, Helvetica, sans-serif">Spanish</a>
+                                <a href="/#resultsTable" (click)="mostPopularMoviesInItalian()" style="font-size: 1.25em; font-family:Arial, Helvetica, sans-serif">Italian</a>
+                                </div>
+                            </div>
+                            <div class="dropdown" style="padding-bottom:1em; width: 30em; margin-left:2em; margin-right: 2em">
+                              <button class="btn btn-basic"style="margin-top: 1em; background-color:black"><b style="color: white; font-size: 1.5em">Advanced Search</b></button>
+                              <div class="dropdown-content" style="border: .10em solid black; width: 30em">
+                                  <li style="padding-bottom: 2em; border-bottom: .10em solid black">
+                                      <p style="text-align: center; margin-top: .5em; text-decoration: underline; font-size: 1.25em; font-family:Arial, Helvetica, sans-serif"><b>Search By Name</b></p>
+                                      <input type="fname" [(ngModel)]="fname" style="float: left; margin-top:1em; margin-left: .5em; width:5em; display: inline-block; width:25%" placeholder="First name..">
+                                      <input type="lname" [(ngModel)]="lname" style="float: left; margin-top:1em; margin-left: .5em; width:5em; display: inline-block; width:25%" placeholder="Surname..">
+                                      <a href="/#actor" id="searchName"><button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 40%; float: right; font-size: .8em; background-color: lightblue; font-family:Arial, Helvetica, sans-serif" (click)="searchByGenreAction(); searchByName()">Search By Name</button></a>   
+
+                                      <p style="text-align: center; margin-top: 2em; text-decoration: underline; font-size: 1.25em; font-family:Arial, Helvetica, sans-serif"><b>Search By Genre</b></p>
+                                    <li style="float: left; display:inline-block; border-bottom: .10em solid black; width:9.9em; border: .10em solid black;">
+                                        <a class="button-one" title="Action" href="/#genre" (click)="searchByGenreAction()">Action</a>
+                                        <a class="button-two" title="Adventure" href="/#genre" (click)="searchByGenreAdventure()">Adventure</a>
+                                        <a class="button-three" title="Animation" href="/#genre" (click)="searchByGenreAnimation()">Animation</a>
+                                        <a class="button-four" title="Comedy" href="/#genre" (click)="searchByGenreComedy()">Comedy</a>
+                                        <a class="button-five" title="Crime" href="/#genre" (click)="searchByGenreCrime()">Crime</a>
+                                        <a class="button-six" title="Drama" href="/#genre" (click)="searchByGenreDrama()">Drama</a>
+                                    </li>
+                                    <li style="float: left; display:inline-block; border-bottom: .10em solid black; width:9.9em; border: .10em solid black">
+                                        <a class="button-six" title="Family" href="/#genre" (click)="searchByGenreFamily()">Family</a>
+                                        <a class="button-five" title="Fantasy" href="/#genre" (click)="searchByGenreFantasy()">Fantasy</a>
+                                        <a class="button-four" title="History" href="/#genre" (click)="searchByGenreHistory()">History</a>
+                                        <a class="button-three" title="Horror" href="/#genre" (click)="searchByGenreHorror()">Horror</a>
+                                        <a class="button-two" title="Music" href="/#genre" (click)="searchByGenreMusic()">Music</a>
+                                        <a class="button-one" title="Mystery" href="/#genre" (click)="searchByGenreMystery()">Mystery</a>
+                                    </li>
+                                    <li style="float: left; display:inline-block; border-bottom: .10em solid black; width:9.9em; border: .10em solid black">
+                                        <a class="button-one" title="Romance" href="/#genre" (click)="searchByGenreRomance()">Romance</a>
+                                        <a class="button-two" title="Sci-Fi" href="/#genre" (click)="searchByGenreScienceFiction()">Sci-Fi</a>
+                                        <a class="button-three" title="TV Movie" href="/#genre" (click)="searchByGenreTVMovie()">TV Movie</a>
+                                        <a class="button-four" title="Thriller" href="/#genre" (click)="searchByGenreThriller()">Thriller</a>
+                                        <a class="button-five" title="War" href="/#genre" (click)="searchByGenreWar()">War</a>
+                                        <a class="button-six" title="Western" href="/#genre" (click)="searchByGenreWestern()">Western</a>
+                                        </li>
+                            </div>
+                    </div>
+
+                    <div class="dropdown" style="width: 25em; padding-bottom:1em">
+                    <button class="btn btn-basic" style="margin-top: 1em; margin-right: 2em; background-color:black"><b style="color: white; font-size: 1.5em">Login</b></button>
+                    <div class="dropdown-content" style="float:right">
+                        <div class="card-body" style="padding-bottom: 1em; border-bottom: .10em solid black">
+                            <h2 class="card-title" id="loginTitle"><b>Login</b></h2>
+                            <div class="loginForm">
+                            <div class="form-group">
+                              <label for="email">Username</label>
+                              <input type="text" class="form-control" id="email" placeholder="Username" [(ngModel)]="username">
+                            </div>
+                            <div class="form-group">
+                              <label for="email">Password</label>
+                              <input type="password" class="form-control" id="password" placeholder="Password" [(ngModel)]="password">
+                            </div>
+                            <button type="submit" class="btn btn-success" (click)="tryLogin(username, password); getRecommededForYou(username); displayPremiumStatus(username)">Login</button>
+                            <br><br>
+                            <div *ngIf="isValid == true && accountExists == true"><span style="display: inline-block; border: .10em solid black; background-color: white; padding: .5em">
+                              <h4 style="color: green">Successfully Logged In as {{username}}.</h4></span></div><br>
+                              <div *ngIf="isValid == true && accountExists == true && isPremium == false" style="border-top: .20em solid black"><span style="display: inline-block; padding: .5em">
+                                <h3 style="font-size: 1.5em; color: goldenrod; text-align: center; background-color: white; border: .10em solid black; padding: 1em"><b>Go Premium to Add Phone Number to Account</b></h3></span></div><br>
+                                <div class="form-group" *ngIf="isValid == true && accountExists == true && isPremium == true">
+                                    <label for="number" *ngIf="isPremium == true">Phone Number (Format: 0871110000)</label>
+                                    <input type="text" *ngIf="isPremium == true" class="form-control" id="number" placeholder="number" [(ngModel)]="phoneNumber"><br>
+                                    <button type="submit" *ngIf="isPremium == true" class="btn btn-primary" (click)="addPhoneNumber(username, phoneNumber)">Add Phone Number</button><br><br>
+                                    <div *ngIf="phoneNumberIsAdded == true"><span style="display: inline-block; border: .10em solid black; background-color: white; padding: .5em">
+                                        <h4 style="color: green">Phone Number <b>{{phoneNumber}}</b> added successfully!<br>
+                                        Please refresh this page to begin using SMS Functionality.</h4></span></div>
+                                        <br>
+                                        <div *ngIf="phoneNumberIsAdded == false"><span style="display: inline-block; border: .10em solid black; background-color: white; padding: .5em">
+                                            <h4 style="color: red">Invalid Entry! Phone Number must be 9 characters in length.</h4></span></div>
+                                  </div>
+                                  <div *ngIf="isValid == true && accountExists == true" style="border-top: .20em solid black"><span style="display: inline-block; padding: .5em">
+                                    <h3 style="color: black"><b>Go Premium - Add Credit Card</b></h3></span></div><br>
+                                  <div class="form-group" *ngIf="isValid == true && accountExists == true">
+                                    <label for="number">Card Number (Format: 1234 5678 9012 3456)</label>
+                                    <input type="text" class="form-control" maxlength="4" id="number" placeholder="1234" [(ngModel)]="cardNum1" cc-format cc-number cc-type="cardType" style="width: 4em; display: inline; margin-right: .5em">
+                                    <input type="text" class="form-control" maxlength="4" id="number" placeholder="5678" [(ngModel)]="cardNum2" cc-format cc-number cc-type="cardType" style="width: 4em; display: inline; margin-right: .5em">
+                                    <input type="text" class="form-control" maxlength="4" id="number" placeholder="9012" [(ngModel)]="cardNum3" cc-format cc-number cc-type="cardType" style="width: 4em; display: inline; margin-right: .5em">
+                                    <input type="text" class="form-control" maxlength="4" id="number" placeholder="3456" [(ngModel)]="cardNum4" cc-format cc-number cc-type="cardType" style="width: 4em; display: inline"><br><br>
+                                    <button type="submit" class="btn btn-primary" (click)="addCreditCard(username, cardNum1, cardNum2, cardNum3, cardNum4)">Add Credit Card</button><br><br>
+                                    <div *ngIf="creditCardIsAdded == true"><span style="display: inline-block; border: .10em solid black; background-color: white; padding: .5em">
+                                        <h4 style="color: green">Credit Card <b>{{cardNum}}</b> added successfully!<br>
+                                        Please refresh this page to begin using Premium Functionality.</h4></span></div>
+                                        <br>
+                                        <div *ngIf="creditCardIsAdded == false"><span style="display: inline-block; border: .10em solid black; background-color: white; padding: .5em">
+                                            <h4 style="color: red">Error! Credit Card Number is not valid.</h4></span></div>
+                                  </div>
+                              <div *ngIf="isValid == false"><span style="display: inline-block; border: .10em solid black; background-color: white; padding: .5em">
+                                <h4 style="color: red">Invalid Username or Password</h4></span></div><br>
+                              <div *ngIf="accountExists == false"><span style="display: inline-block; border: .10em solid black; background-color: white; padding: .5em">
+                                <h4 style="color: red">Account with the username <b style="color:black">{{username}}</b> does not exist</h4></span></div>
+                            </div>
+                        </div>
+                        <br>
+                        <h2 *ngIf="isValid != true && accountExists != true" style="color: red;">Don't have an account?</h2>
+                        <h2 *ngIf="isValid != true && accountExists != true" class="card-title" id="loginTitle"><b>Sign Up</b></h2>
+                        <div *ngIf="isValid != true && accountExists != true" class="loginForm">
+                            <form (ngSubmit)="processForm()">
+                                <div class="form group">
+                                    <label for="username">Username</label>
+                                    <input type="text" name="username" class="form-control" placeholder="Username" [(ngModel)]="user.username">
+                                </div>
+                                <br>
+                                <div class="form group">
+                                    <label for="password">Password</label>
+                                    <input type="password" name="password" class="form-control" placeholder="Password" [(ngModel)]="user.password">
+                                </div>
+                                <br>
+                                <input type="submit" value="Sign Up" class="btn btn-success">
+                                <br><br>
+                                <div *ngIf="accountValid == true && lengthValid == true"><span style="display: inline-block; border: .10em solid black; background-color: white; padding: .5em">
+                                    <h4 style="color: green">Successfully Created Account! Username: {{user.username}}</h4></span></div><br>
+                            <div *ngIf="accountValid == false"><span style="display: inline-block; border: .10em solid black; background-color: white; padding: .5em"><h4 style="color: red">Username Already Taken</h4></span></div>
+                            <div *ngIf="lengthValid == false"><span style="display: inline-block; border: .10em solid black; background-color: white; padding: .5em"><h4 style="color: red">Username must be between 4 and 15 characters</h4></span></div>
+                            </form>
+                            </div>
+                        </div>
+                    </div>
+                    <button *ngIf="isValid == true && accountExists == true" class="btn btn-basic" style="margin-top: 1em; margin-left: 3em; margin-right: 1em; background-color:black; margin-right: 10em"><a href="/#favouritesTable" (click)="viewFavourites(username)"><b style="color: white; font-size: 1.5em">Favourites</b></a></button>
+                    
+                    <div class="dropdown" style="width: 25em; padding-bottom:1em">
+                        <button *ngIf="isValid == true && accountExists == true" class="btn btn-basic" style="margin-top: 1em; margin-left: 3em; margin-right: 1em; background-color:black; margin-right: 10em"><b style="color: white; font-size: 1.5em">Make Query</b></button>
+                        <div class="dropdown-content" style="float:right">
+                            <div class="card-body" style="padding-bottom: 1em; border-bottom: .10em solid black">
+                                <h2 class="card-title" id="loginTitle" style="border-bottom: .10em solid black"><b>Make Query</b></h2>
+                                <h3 style="color:red; text-align:left"><b>Query Title</b></h3>
+                                <textarea type="text" [(ngModel)]="queryTitle" rows="1" cols="50" style="width: 100%" placeholder="Query Title (Max 50 Words)"></textarea>
+                                <h3 style="color:red; text-align:left"><b>Query</b></h3>
+                                <textarea type="text" [(ngModel)]="query" rows="5" cols="50" style="width: 100%" placeholder="Query (Max 250 Words)"></textarea>
+                            </div>
+                            <br>
+                            <button class="btn btn-basic" style="margin-left: 1em; display: inline-block; width: 90%; float: left; font-size: 1em; background-color:black; color: white; font-family:Arial, Helvetica, sans-serif; margin-bottom: 2em" 
+                                *ngIf="data" (click)="makeQuery(queryTitle, query, username)">Make Query</button>
+                            <br><br>
+                            <div *ngIf="queryIsSaved == true"><span style="display: inline-block; border: .10em solid black; background-color: white; padding: .5em">
+                            <h4 style="color: green"><b>Query has been saved and an administrator will respond to you soon!</b><br><br>
+                            <b>Thank you for your feedback.</b><br><br><b>You can view your active queries below.</b></h4></span></div><br>
+                            <br>
+                            <button class="btn btn-basic" style="margin-left: 1em; display: inline-block; width: 90%; float: left; font-size: 1em; background-color: green; color: white; font-family:Arial, Helvetica, sans-serif; margin-bottom: 2em" 
+                                *ngIf="data" (click)="getAddressedQueriesForSpecificUser(username)">View Addressed Queries</button>
+                            <div *ngIf="addressedQueriesVisible == true">
+                                <h3 style="border-bottom: .10em solid black"><b>Addressed Queries</b></h3>
+                                <table class="table" style="display: inline-block">
+                                        <tr>
+                                            <th class="title" style="font-size: 1.5em;">Query</th>
+                                            <th class="title" style="font-size: 1.5em;">Admin Reply</th>
+                                        </tr>
+                                    
+                                        <tbody>
+                                        <tr *ngFor="let addr of addressedQueries">
+                                            <td style="font-size: 1.25em" *ngIf="data"><b>{{addr.queryText}}</b></td>
+                                            <td style="font-size: 1.25em" *ngIf="data"><b>{{addr.responseText}}</b></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                            </div>    
+                            
+                        </div>
+                    </div>
+
+                    <button *ngIf="isValid == true && accountExists == true" class="btn btn-basic" style="margin-top: 1em; margin-left: 3em; margin-right: 1em; background-color:black;"><a href="/"><b style="color: white; font-size: 1.5em">Logout</b></a></button>
+                    <button *ngIf="isValid == true && accountExists == true" class="btn btn-basic" style="margin-top: 1em; margin-left: 3em; margin-right: 1em; background-color:black; height: 3em"><p style="color: white; font-size: 1.5em;">Logged in as: <b>{{username}}</b></p></button>
+                    <button *ngIf="isValid == true && accountExists == true && isPremium == true" class="btn btn-basic" style="margin-top: 1em; margin-left: 3em; margin-right: 1em; background-color: #babd04; height: 3em"><p style="color: black; font-size: 1.5em;"><b>Premium Account</b></p></button>
+                </li>
+                    
+                </ul>
+            
+            
+        </nav>
+<br><br>
+
+<div id="mostPopularAndKeywordTables">
+    <h2 class="intro"><b style="background-color: white; padding:.25em; border:.10em solid black; font-size: 1.25em; font-family:Arial, Helvetica, sans-serif">Welcome to the Walsh Movie Database</b><br><br>
+    <b style="background-color: white; padding:.25em; border:.10em solid black; font-size: 1.25em; font-family:Arial, Helvetica, sans-serif">Search for your favourite Movies and TV Shows here!</b></h2>
+
+    <h2 style="background-color: white; border:.10em solid black; text-align:left; padding-bottom: 1em; padding-top: .5em">
+      <input type="keyword" [(ngModel)]="keyword" style="width:7em; float:left; display: inline-block; margin-top: .5em; margin-left: 1em" placeholder="Search..">
+      <span style="display: inline-block;"><div class="dropdown" style="width: 25em; padding-bottom:1em; float:left">
+      <button class="btn btn-success" style="display: inline-block; width:7em; padding-bottom: .75em; margin-top: 1.15em;" (click)="searchByKeywordInEnglish()">Search</button>
+        <div class="dropdown-content" style="float:left">
+                <a href="/#resultsTable" style="font-size: .5em" (click)="searchByKeywordInEnglish()">English</a>
+                <a href="/#resultsTable" style="font-size: .5em" (click)="searchByKeywordInFrench()">French</a>
+                <a href="/#resultsTable" style="font-size: .5em" (click)="searchByKeywordInGerman()">German</a>
+                <a href="/#resultsTable" style="font-size: .5em" (click)="searchByKeywordInSpanish()">Spanish</a>
+                <a href="/#resultsTable" style="font-size: .5em" (click)="searchByKeywordInItalian()">Italian</a>
+            </div>
+        </div>
+        <b style="margin-left: 3.5em; padding: 5em;">Take a look at the Popular Movies we have found for You!</b>
+    </span>
+        </h2>
+
+<table style="width: 100%; display: inline-block">
+  <tr>
+    <th class="title" style="font-size: 1.25em; font-family:Arial, Helvetica, sans-serif">Movie Title</th>
+    <th class="genericData" style="font-size: 1.25em; font-family:Arial, Helvetica, sans-serif">Description</th>
+    <th class="description" style="font-size: 1.25em; font-family:Arial, Helvetica, sans-serif">Release Date</th>
+    <th class="trailer" style="font-size: 1.25em; font-family:Arial, Helvetica, sans-serif">Trailer</th>
+    <th *ngIf="isValid == true && accountExists == true" class="reviewTextField" style="font-size: 1.25em; font-family:Arial, Helvetica, sans-serif">Review</th>
+  </tr>
+
+  <tr class="resultsTable" ng-repeat="movie in movies">
+    <td class="dataFont" *ngIf="data"><b>{{data.results[0].title}}</b><br> <img src="https://image.tmdb.org/t/p/w185/{{data.results[0].poster_path}}" style="border:.10em solid black; margin-top: 1em"></td>
+    <td class="dataFont" *ngIf="data">{{data.results[0].overview}}</td>
+    <td class="dataFont" *ngIf="data">{{data.results[0].release_date}}</td>
+                                                                                        <!--Captain Marvel-->
+    <td class="dataFont"><iframe width="560" height="315" style="border: .20em solid black" src="https://www.youtube.com/embed/Z1BCujX3pw8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
+    <td *ngIf="isValid == true && accountExists == true"><h2 *ngIf="data" [(ngModel)]="movie_id" style="text-align: center"><b>Review {{data.results[0].title}}</b></h2>
+        <textarea type="text" [(ngModel)]="reviewText" rows="10" cols="50" style="width: 100%" placeholder="Review..."></textarea>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 20%; float: left; font-size: 1em; background-color: green; color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addReview(data.results[0].id, data.results[0].title, username, reviewText)">Make Review</button>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 27.5%; float: left; font-size: 1em; background-color: rgb(230, 6, 43); color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addToFavourites(username, data.results[0].id, data.results[0].title, data.results[0].poster_path, data.results[0].release_date); addToSearchHistory(data.results[0].id, data.results[0].title, data.results[0].genre_ids[0], username)">Save to Favourites</button>
+        <a href="/#reviewsTable"><button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 40%; float: right; font-size: 1em; background-color: blue; color: white; font-family:Arial, Helvetica, sans-serif"
+        *ngIf="data" (click)="viewReviews(data.results[0].id, data.results[0].title)">Reviews for {{data.results[0].title}}</button></a>
+        <button *ngIf="isPremium == true" class="btn btn-default" style="margin-top: 1em; margin-left: 1em; display: inline-block; width: 95%; float: left; font-size: 1em; background-color: rgb(0, 0, 0); color: white; font-family:Arial, Helvetica, sans-serif"
+        (click)="sendSmsMessage(username, data.results[0].title, data.results[0].release_date, data.results[0].overview)">Send SMS with information for {{data.results[0].title}}</button>
+        <br><br><br>
+        <p *ngIf="isPremium != true" style="font-size: 1.5em; color: goldenrod; text-align: center; background-color: white; border: .10em solid black; padding: 1em"><b>Go Premium to access SMS Functionality</b></p>
+    </td>
+  </tr>
+
+  <tr class="resultsTable" ng-repeat="movie in movies">                                 <!--Avengers Endgame-->
+    <td class="dataFont" *ngIf="data"><b>{{data.results[1].title}}</b><br> <img src="https://image.tmdb.org/t/p/w185/{{data.results[1].poster_path}}" style="border:.10em solid black; margin-top: 1em"></td>
+    <td class="dataFont" *ngIf="data">{{data.results[1].overview}}</td>
+    <td class="dataFont" *ngIf="data">{{data.results[1].release_date}}</td>
+    <td class="dataFont"><iframe width="560" height="315" style="border: .20em solid black" src="https://www.youtube.com/embed/TcMBFSGVi1c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
+    <td *ngIf="isValid == true && accountExists == true"><h2 *ngIf="data" [(ngModel)]="movie_id" style="text-align: center"><b>Review {{data.results[1].title}}</b></h2>
+        <textarea type="text" [(ngModel)]="reviewText1" rows="10" cols="50" style="width: 100%" placeholder="Review..."></textarea>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 20%; float: left; font-size: 1em; background-color: green; color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addReview(data.results[1].id, data.results[1].title, username, reviewText1)">Make Review</button>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 27.5%; float: left; font-size: 1em; background-color: rgb(230, 6, 43); color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addToFavourites(username, data.results[1].id, data.results[1].title, data.results[1].poster_path, data.results[1].release_date); addToSearchHistory(data.results[1].id, data.results[1].title, data.results[1].genre_ids[0], username)">Save to Favourites</button>
+        <a href="/#reviewsTable"><button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 40%; float: right; font-size: 1em; background-color: blue; color: white; font-family:Arial, Helvetica, sans-serif"
+        *ngIf="data" (click)="viewReviews(data.results[1].id, data.results[1].title)">Reviews for {{data.results[1].title}}</button></a>
+        <button *ngIf="isPremium == true" class="btn btn-default" style="margin-top: 1em; margin-left: 1em; display: inline-block; width: 95%; float: left; font-size: 1em; background-color: rgb(0, 0, 0); color: white; font-family:Arial, Helvetica, sans-serif"
+        (click)="sendSmsMessage(username, data.results[1].title, data.results[1].release_date, data.results[1].overview)">Send SMS with information for {{data.results[1].title}}</button>
+        <br><br><br>
+        <p *ngIf="isPremium != true" style="font-size: 1.5em; color: goldenrod; text-align: center; background-color: white; border: .10em solid black; padding: 1em"><b>Go Premium to access SMS Functionality</b></p>
+    </td>
+</tr>
+
+<tr class="resultsTable" ng-repeat="movie in movies">                                      <!--Avengers Infinity War-->
+    <td class="dataFont" *ngIf="data"><b>{{data.results[2].title}}</b><br> <img src="https://image.tmdb.org/t/p/w185/{{data.results[2].poster_path}}" style="border:.10em solid black; margin-top: 1em"></td>
+    <td class="dataFont" *ngIf="data">{{data.results[2].overview}}</td>
+    <td class="dataFont" *ngIf="data">{{data.results[2].release_date}}</td>
+    <td class="dataFont"><iframe width="560" height="315" style="border: .20em solid black" src="https://www.youtube.com/embed/6ZfuNTqbHE8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
+    <td *ngIf="isValid == true && accountExists == true"><h2 *ngIf="data" [(ngModel)]="movie_id" style="text-align: center"><b>Review {{data.results[2].title}}</b></h2>
+        <textarea type="text" [(ngModel)]="reviewText2" rows="10" cols="50" style="width: 100%" placeholder="Review..."></textarea>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 20%; float: left; font-size: 1em; background-color: green; color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addReview(data.results[2].id, data.results[2].title, username, reviewText2)">Make Review</button>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 27.5%; float: left; font-size: 1em; background-color: rgb(230, 6, 43); color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addToFavourites(username, data.results[2].id, data.results[2].title, data.results[2].poster_path, data.results[2].release_date); addToSearchHistory(data.results[2].id, data.results[2].title, data.results[2].genre_ids[0], username)">Save to Favourites</button>
+        <a href="/#reviewsTable"><button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 40%; float: right; font-size: 1em; background-color: blue; color: white; font-family:Arial, Helvetica, sans-serif"
+        *ngIf="data" (click)="viewReviews(data.results[2].id, data.results[2].title)">Reviews for {{data.results[2].title}}</button></a>
+        <button *ngIf="isPremium == true" class="btn btn-default" style="margin-top: 1em; margin-left: 1em; display: inline-block; width: 95%; float: left; font-size: 1em; background-color: rgb(0, 0, 0); color: white; font-family:Arial, Helvetica, sans-serif"
+        (click)="sendSmsMessage(username, data.results[2].title, data.results[2].release_date, data.results[2].overview)">Send SMS with information for {{data.results[2].title}}</button>
+        <br><br><br>
+        <p *ngIf="isPremium != true" style="font-size: 1.5em; color: goldenrod; text-align: center; background-color: white; border: .10em solid black; padding: 1em"><b>Go Premium to access SMS Functionality</b></p>
+    </td>
+  </tr>
+
+  <tr class="resultsTable" ng-repeat="movie in movies">                                     <!--The Avengers-->
+    <td class="dataFont" *ngIf="data"><b>{{data.results[3].title}}</b><br> <img src="https://image.tmdb.org/t/p/w185/{{data.results[3].poster_path}}" style="border:.10em solid black; margin-top: 1em"></td>
+    <td class="dataFont" *ngIf="data">{{data.results[3].overview}}</td>
+    <td class="dataFont" *ngIf="data">{{data.results[3].release_date}}</td>
+    <td class="dataFont"><iframe width="560" height="315" style="border: .20em solid black" src="https://www.youtube.com/embed/eOrNdBpGMv8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
+    <td *ngIf="isValid == true && accountExists == true"><h2 *ngIf="data" [(ngModel)]="movie_id" style="text-align: center"><b>Review {{data.results[3].title}}</b></h2>
+        <textarea type="text" [(ngModel)]="reviewText3" rows="10" cols="50" style="width: 100%" placeholder="Review..."></textarea>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 20%; float: left; font-size: 1em; background-color: green; color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addReview(data.results[3].id, data.results[3].title, username, reviewText3)">Make Review</button>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 27.5%; float: left; font-size: 1em; background-color: rgb(230, 6, 43); color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addToFavourites(username, data.results[3].id, data.results[3].title, data.results[3].poster_path, data.results[3].release_date); addToSearchHistory(data.results[3].id, data.results[3].title, data.results[3].genre_ids[0], username)">Save to Favourites</button>
+        <a href="/#reviewsTable"><button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 40%; float: right; font-size: 1em; background-color: blue; color: white; font-family:Arial, Helvetica, sans-serif"
+        *ngIf="data" (click)="viewReviews(data.results[3].id, data.results[3].title)">Reviews for {{data.results[3].title}}</button></a>
+        <button *ngIf="isPremium == true" class="btn btn-default" style="margin-top: 1em; margin-left: 1em; display: inline-block; width: 95%; float: left; font-size: 1em; background-color: rgb(0, 0, 0); color: white; font-family:Arial, Helvetica, sans-serif"
+        (click)="sendSmsMessage(username, data.results[3].title, data.results[3].release_date, data.results[3].overview)">Send SMS with information for {{data.results[3].title}}</button>
+        <br><br><br>
+        <p *ngIf="isPremium != true" style="font-size: 1.5em; color: goldenrod; text-align: center; background-color: white; border: .10em solid black; padding: 1em"><b>Go Premium to access SMS Functionality</b></p>
+    </td>
+    </tr>
+
+    <tr class="resultsTable" ng-repeat="movie in movies">                               <!--Hellboy-->
+        <td class="dataFont" *ngIf="data"><b>{{data.results[4].title}}</b><br> <img src="https://image.tmdb.org/t/p/w185/{{data.results[4].poster_path}}" style="border:.10em solid black; margin-top: 1em"></td>
+        <td class="dataFont" *ngIf="data">{{data.results[4].overview}}</td>
+        <td class="dataFont" *ngIf="data">{{data.results[4].release_date}}</td>
+        <td class="dataFont"><iframe width="560" height="315" style="border: .20em solid black" src="https://www.youtube.com/embed/ZsBO4b3tyZg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
+        <td *ngIf="isValid == true && accountExists == true"><h2 *ngIf="data" [(ngModel)]="movie_id" style="text-align: center"><b>Review {{data.results[4].title}}</b></h2>
+            <textarea type="text" [(ngModel)]="reviewText4" rows="10" cols="50" style="width: 100%" placeholder="Review..."></textarea>
+            <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 20%; float: left; font-size: 1em; background-color: green; color: white; font-family:Arial, Helvetica, sans-serif" 
+            *ngIf="data" (click)="addReview(data.results[4].id, data.results[4].title, username, reviewText4)">Make Review</button>
+            <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 27.5%; float: left; font-size: 1em; background-color: rgb(230, 6, 43); color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addToFavourites(username, data.results[4].id, data.results[4].title, data.results[4].poster_path, data.results[4].release_date); addToSearchHistory(data.results[4].id, data.results[4].title, data.results[4].genre_ids[0], username)">Save to Favourites</button>
+            <a href="/#reviewsTable"><button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 40%; float: right; font-size: 1em; background-color: blue; color: white; font-family:Arial, Helvetica, sans-serif"
+            *ngIf="data" (click)="viewReviews(data.results[4].id, data.results[4].title)">Reviews for {{data.results[4].title}}</button></a>
+            <button *ngIf="isPremium == true" class="btn btn-default" style="margin-top: 1em; margin-left: 1em; display: inline-block; width: 95%; float: left; font-size: 1em; background-color: rgb(0, 0, 0); color: white; font-family:Arial, Helvetica, sans-serif"
+        (click)="sendSmsMessage(username, data.results[4].title, data.results[4].release_date, data.results[4].overview)">Send SMS with information for {{data.results[4].title}}</button>
+        <br><br><br>
+        <p *ngIf="isPremium != true" style="font-size: 1.5em; color: goldenrod; text-align: center; background-color: white; border: .10em solid black; padding: 1em"><b>Go Premium to access SMS Functionality</b></p>
+        </td>
+  </tr>
+
+  <tr class="resultsTable" ng-repeat="movie in movies">                                        <!--After-->
+      <td class="dataFont" *ngIf="data"><b>{{data.results[5].title}}</b><br> <img src="https://image.tmdb.org/t/p/w185/{{data.results[5].poster_path}}" style="border:.10em solid black; margin-top: 1em"></td>
+    <td class="dataFont" *ngIf="data">{{data.results[5].overview}}</td>
+    <td class="dataFont" *ngIf="data">{{data.results[5].release_date}}</td>
+    <td class="dataFont"><iframe width="560" height="315" style="border: .20em solid black" src="https://www.youtube.com/embed/BNLta4nDM10" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
+    <td *ngIf="isValid == true && accountExists == true"><h2 *ngIf="data" [(ngModel)]="movie_id" style="text-align: center"><b>Review {{data.results[5].title}}</b></h2>
+        <textarea type="text" [(ngModel)]="reviewText5" rows="10" cols="50" style="width: 100%" placeholder="Review..."></textarea>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 20%; float: left; font-size: 1em; background-color: green; color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addReview(data.results[5].id, data.results[5].title, username, reviewText5)">Make Review</button>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 27.5%; float: left; font-size: 1em; background-color: rgb(230, 6, 43); color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addToFavourites(username, data.results[5].id, data.results[5].title, data.results[5].poster_path, data.results[5].release_date); addToSearchHistory(data.results[5].id, data.results[5].title, data.results[5].genre_ids[0], username)">Save to Favourites</button>
+        <a href="/#reviewsTable"><button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 40%; float: right; font-size: 1em; background-color: blue; color: white; font-family:Arial, Helvetica, sans-serif"
+        *ngIf="data" (click)="viewReviews(data.results[5].id, data.results[5].title)">Reviews for {{data.results[5].title}}</button></a>
+        <button *ngIf="isPremium == true" class="btn btn-default" style="margin-top: 1em; margin-left: 1em; display: inline-block; width: 95%; float: left; font-size: 1em; background-color: rgb(0, 0, 0); color: white; font-family:Arial, Helvetica, sans-serif"
+        (click)="sendSmsMessage(username, data.results[5].title, data.results[5].release_date, data.results[5].overview)">Send SMS with information for {{data.results[5].title}}</button>
+        <br><br><br>
+        <p *ngIf="isPremium != true" style="font-size: 1.5em; color: goldenrod; text-align: center; background-color: white; border: .10em solid black; padding: 1em"><b>Go Premium to access SMS Functionality</b></p>
+    </td>
+    </tr>
+
+    <tr class="resultsTable" ng-repeat="movie in movies">                                   <!--Shazam-->
+        <td class="dataFont" *ngIf="data"><b>{{data.results[6].title}}</b><br> <img src="https://image.tmdb.org/t/p/w185/{{data.results[6].poster_path}}" style="border:.10em solid black; margin-top: 1em"></td>
+    <td class="dataFont" *ngIf="data">{{data.results[6].overview}}</td>
+    <td class="dataFont" *ngIf="data">{{data.results[6].release_date}}</td>
+    <td class="dataFont"><iframe width="560" height="315" style="border: .20em solid black" src="https://www.youtube.com/embed/-oD7B7oiBtw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
+    <td *ngIf="isValid == true && accountExists == true"><h2 *ngIf="data" [(ngModel)]="movie_id" style="text-align: center"><b>Review {{data.results[6].title}}</b></h2>
+        <textarea type="text" [(ngModel)]="reviewText6" rows="10" cols="50" style="width: 100%" placeholder="Review..."></textarea>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 20%; float: left; font-size: 1em; background-color: green; color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addReview(data.results[6].id, data.results[6].title,  username, reviewText6)">Make Review</button>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 27.5%; float: left; font-size: 1em; background-color: rgb(230, 6, 43); color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addToFavourites(username, data.results[6].id); addToSearchHistory(data.results[6].id, data.results[6].title, data.results[6].genre_ids[0], username)">Save to Favourites</button>
+        <a href="/#reviewsTable"><button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 40%; float: right; font-size: 1em; background-color: blue; color: white; font-family:Arial, Helvetica, sans-serif"
+        *ngIf="data" (click)="viewReviews(data.results[6].id, data.results[6].title, data.results[6].title, data.results[6].poster_path, data.results[6].release_date)">Reviews for {{data.results[6].title}}</button></a>
+        <button *ngIf="isPremium == true" class="btn btn-default" style="margin-top: 1em; margin-left: 1em; display: inline-block; width: 95%; float: left; font-size: 1em; background-color: rgb(0, 0, 0); color: white; font-family:Arial, Helvetica, sans-serif"
+        (click)="sendSmsMessage(username, data.results[6].title, data.results[6].release_date, data.results[6].overview)">Send SMS with information for {{data.results[6].title}}</button>
+        <br><br><br>
+        <p *ngIf="isPremium != true" style="font-size: 1.5em; color: goldenrod; text-align: center; background-color: white; border: .10em solid black; padding: 1em"><b>Go Premium to access SMS Functionality</b></p>
+    </td>
+      </tr>
+
+      <tr class="resultsTable" ng-repeat="movie in movies">                                   <!--Doraemon-->
+          <td class="dataFont" *ngIf="data"><b>{{data.results[7].title}}</b><br> <img src="https://image.tmdb.org/t/p/w185/{{data.results[7].poster_path}}" style="border:.10em solid black; margin-top: 1em"></td>
+    <td class="dataFont" *ngIf="data">{{data.results[7].overview}}</td>
+    <td class="dataFont" *ngIf="data">{{data.results[7].release_date}}</td>
+    <td class="dataFont"><iframe width="560" height="315" style="border: .20em solid black" src="https://www.youtube.com/embed/ghjF37V1cW0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
+    <td *ngIf="isValid == true && accountExists == true"><h2 *ngIf="data" [(ngModel)]="movie_id" style="text-align: center"><b>Review {{data.results[7].title}}</b></h2>
+        <textarea type="text" [(ngModel)]="reviewText7" rows="10" cols="50" style="width: 100%" placeholder="Review..."></textarea>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 20%; float: left; font-size: 1em; background-color: green; color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addReview(data.results[7].id, data.results[7].title, username, reviewText7)">Make Review</button>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 27.5%; float: left; font-size: 1em; background-color: rgb(230, 6, 43); color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addToFavourites(username, data.results[7].id, data.results[7].title, data.results[7].poster_path, data.results[7].release_date); addToSearchHistory(data.results[7].id, data.results[7].title, data.results[7].genre_ids[0], username)">Save to Favourites</button>
+        <a href="/#reviewsTable"><button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 40%; float: right; font-size: 1em; background-color: blue; color: white; font-family:Arial, Helvetica, sans-serif"
+        *ngIf="data" (click)="viewReviews(data.results[7].id, data.results[7].title)">Reviews for {{data.results[7].title}}</button></a>
+        <button *ngIf="isPremium == true" class="btn btn-default" style="margin-top: 1em; margin-left: 1em; display: inline-block; width: 95%; float: left; font-size: 1em; background-color: rgb(0, 0, 0); color: white; font-family:Arial, Helvetica, sans-serif"
+        (click)="sendSmsMessage(username, data.results[7].title, data.results[7].release_date, data.results[7].overview)">Send SMS with information for {{data.results[7].title}}</button>
+        <br><br><br>
+        <p *ngIf="isPremium != true" style="font-size: 1.5em; color: goldenrod; text-align: center; background-color: white; border: .10em solid black; padding: 1em"><b>Go Premium to access SMS Functionality</b></p>
+    </td>
+        </tr>
+
+        <tr class="resultsTable" ng-repeat="movie in movies">                               <!--What men Want-->
+            <td class="dataFont" *ngIf="data"><b>{{data.results[8].title}}</b><br> <img src="https://image.tmdb.org/t/p/w185/{{data.results[8].poster_path}}" style="border:.10em solid black; margin-top: 1em"></td>
+    <td class="dataFont" *ngIf="data">{{data.results[8].overview}}</td>
+    <td class="dataFont" *ngIf="data">{{data.results[8].release_date}}</td>
+    <td class="dataFont"><iframe width="560" height="315" style="border: .20em solid black" src="https://www.youtube.com/embed/HeoLiTirRp4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
+    <td *ngIf="isValid == true && accountExists == true"><h2 *ngIf="data" [(ngModel)]="movie_id" style="text-align: center"><b>Review {{data.results[8].title}}</b></h2>
+        <textarea type="text" [(ngModel)]="reviewText8" rows="10" cols="50" style="width: 100%" placeholder="Review..."></textarea>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 20%; float: left; font-size: 1em; background-color: green; color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addReview(data.results[8].id, data.results[8].title, username, reviewText8)">Make Review</button>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 27.5%; float: left; font-size: 1em; background-color: rgb(230, 6, 43); color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addToFavourites(username, data.results[8].id, data.results[8].title, data.results[8].poster_path, data.results[8].release_date); addToSearchHistory(data.results[8].id, data.results[8].title, data.results[8].genre_ids[0], username)">Save to Favourites</button>
+        <a href="/#reviewsTable"><button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 40%; float: right; font-size: 1em; background-color: blue; color: white; font-family:Arial, Helvetica, sans-serif"
+        *ngIf="data" (click)="viewReviews(data.results[8].id, data.results[8].title)">Reviews for {{data.results[8].title}}</button></a>
+        <button *ngIf="isPremium == true" class="btn btn-default" style="margin-top: 1em; margin-left: 1em; display: inline-block; width: 95%; float: left; font-size: 1em; background-color: rgb(0, 0, 0); color: white; font-family:Arial, Helvetica, sans-serif"
+        (click)="sendSmsMessage(username, data.results[8].title, data.results[8].release_date, data.results[8].overview)">Send SMS with information for {{data.results[8].title}}</button>
+        <br><br><br>
+        <p *ngIf="isPremium != true" style="font-size: 1.5em; color: goldenrod; text-align: center; background-color: white; border: .10em solid black; padding: 1em"><b>Go Premium to access SMS Functionality</b></p>
+    </td>
+          </tr>
+
+          <tr class="resultsTable" ng-repeat="movie in movies">                         <!--Glass-->
+              <td class="dataFont" *ngIf="data"><b>{{data.results[9].title}}</b><br> <img src="https://image.tmdb.org/t/p/w185/{{data.results[9].poster_path}}" style="border:.10em solid black; margin-top: 1em"></td>
+    <td class="dataFont" *ngIf="data">{{data.results[9].overview}}</td>
+    <td class="dataFont" *ngIf="data">{{data.results[9].release_date}}</td>
+    <td class="dataFont"><iframe width="560" height="315" style="border: .20em solid black" src="https://www.youtube.com/embed/aBL6COBGjCA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
+    <td *ngIf="isValid == true && accountExists == true"><h2 *ngIf="data" [(ngModel)]="movie_id" style="text-align: center"><b>Review {{data.results[9].title}}</b></h2>
+        <textarea type="text" [(ngModel)]="reviewText9" rows="10" cols="50" style="width: 100%" placeholder="Review..."></textarea>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 20%; float: left; font-size: 1em; background-color: green; color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addReview(data.results[9].id, data.results[9].title, username, reviewText9)">Make Review</button>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 27.5%; float: left; font-size: 1em; background-color: rgb(230, 6, 43); color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addToFavourites(username, data.results[9].id, data.results[9].title, data.results[9].poster_path, data.results[9].release_date); addToSearchHistory(data.results[9].id, data.results[9].title, data.results[9].genre_ids[0], username)">Save to Favourites</button>
+        <a href="/#reviewsTable"><button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 40%; float: right; font-size: 1em; background-color: blue; color: white; font-family:Arial, Helvetica, sans-serif"
+        *ngIf="data" (click)="viewReviews(data.results[9].id, data.results[9].title)">Reviews for {{data.results[9].title}}</button></a>
+        <button *ngIf="isPremium == true" class="btn btn-default" style="margin-top: 1em; margin-left: 1em; display: inline-block; width: 95%; float: left; font-size: 1em; background-color: rgb(0, 0, 0); color: white; font-family:Arial, Helvetica, sans-serif"
+        (click)="sendSmsMessage(username, data.results[9].title, data.results[9].release_date, data.results[9].overview)">Send SMS with information for {{data.results[9].title}}</button>
+        <br><br><br>
+        <p *ngIf="isPremium != true" style="font-size: 1.5em; color: goldenrod; text-align: center; background-color: white; border: .10em solid black; padding: 1em"><b>Go Premium to access SMS Functionality</b></p>
+    </td>
+            </tr>
+</table>
+</div>
+
+<br><br>
+
+<div id="recommendedForYou" *ngIf="recommendedTableVisible == true" style="padding-bottom: 2em;">
+    <h2 style="background-color: white; padding:.25em; border:.10em solid black; text-align: center; font-family:Arial, Helvetica, sans-serif; padding-top: 1em"><b>Here are some Movies we recommend for You similar to your Favourites!</b></h2>
+<table style="width: 100%; display: inline-block">
+    <tr id="recommendedForYouTable">
+          <th class="title">Movie Title</th>
+          <th class="genericData">Description</th>
+          <th class="description">Release Date</th>
+          <th *ngIf="isValid == true && accountExists == true" class="reviewTextField" style="font-size: 1.25em; font-family:Arial, Helvetica, sans-serif">Review</th>
+        </tr>
+  
+     <tr class="recommendedResultsTable">
+      <td class="dataFont" *ngIf="data"><b>{{recommended.results[0].title}}</b><br> <img src="https://image.tmdb.org/t/p/w185/{{recommended.results[0].poster_path}}" style="border:.10em solid black; margin-top: 1em"></td>
+      <td class="dataFont" *ngIf="data">{{recommended.results[0].overview}}</td>
+      <td class="dataFont" *ngIf="data">{{recommended.results[0].release_date}}</td>
+      <td *ngIf="isValid == true && accountExists == true"><h2 *ngIf="data" [(ngModel)]="movie_id" style="text-align: center"><b>Review {{recommended.results[0].title}}</b></h2>
+        <textarea type="text" [(ngModel)]="reviewText10" rows="10" cols="50" style="width: 100%" placeholder="Review..."></textarea>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 20%; float: left; font-size: 1em; background-color: green; color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addReview(recommended.results[0].id, recommended.results[0].title, username, reviewText10)">Make Review</button>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 27.5%; float: left; font-size: 1em; background-color: rgb(230, 6, 43); color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addToFavourites(username, recommended.results[0].id, recommended.results[0].title, recommended.results[0].poster_path, recommended.results[0].release_date);
+        addToSearchHistory(recommended.results[0].id, recommended.results[0].title, recommended.results[0].genre_ids[0], username)">Save to Favourites</button>
+        <a href="/#reviewsTable"><button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 40%; float: right; font-size: 1em; background-color: blue; color: white; font-family:Arial, Helvetica, sans-serif"
+        *ngIf="data" (click)="viewReviews(recommended.results[0].id, recommended.results[0].title)">Reviews for {{recommended.results[0].title}}</button></a>
+        <button *ngIf="isPremium == true" class="btn btn-default" style="margin-top: 1em; margin-left: 1em; display: inline-block; width: 95%; float: left; font-size: 1em; background-color: rgb(0, 0, 0); color: white; font-family:Arial, Helvetica, sans-serif"
+        (click)="sendSmsMessage(username, recommended.results[0].title, recommended.results[0].release_date, recommended.results[0].overview)">Send SMS with information for {{recommended.results[0].title}}</button>
+        <br><br><br>
+        <p *ngIf="isPremium != true" style="font-size: 1.5em; color: goldenrod; text-align: center; background-color: white; border: .10em solid black; padding: 1em"><b>Go Premium to access SMS Functionality</b></p>
+    </td>
+  </tr>
+  
+  <tr class="recommendedResultsTable">
+ <td class="dataFont" *ngIf="data"><b>{{recommended.results[1].title}}</b><br> <img src="https://image.tmdb.org/t/p/w185/{{recommended.results[1].poster_path}}" style="border:.10em solid black; margin-top: 1em"></td>
+ <td class="dataFont" *ngIf="data">{{recommended.results[1].overview}}</td>
+ <td class="dataFont" *ngIf="data">{{recommended.results[1].release_date}}</td>
+ <td *ngIf="isValid == true && accountExists == true"><h2 *ngIf="data" [(ngModel)]="movie_id" style="text-align: center"><b>Review {{recommended.results[1].title}}</b></h2>
+   <textarea type="text" [(ngModel)]="reviewText11" rows="10" cols="50" style="width: 100%" placeholder="Review..."></textarea>
+   <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 20%; float: left; font-size: 1em; background-color: green; color: white; font-family:Arial, Helvetica, sans-serif" 
+   *ngIf="data" (click)="addReview(recommended.results[1].id, recommended.results[1].title, username, reviewText11)">Make Review</button>
+   <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 27.5%; float: left; font-size: 1em; background-color: rgb(230, 6, 43); color: white; font-family:Arial, Helvetica, sans-serif" 
+   *ngIf="data" (click)="addToFavourites(username, recommended.results[1].id, recommended.results[1].title, recommended.results[1].poster_path, recommended.results[1].release_date);
+   addToSearchHistory(recommended.results[1].id, recommended.results[1].title, recommended.results[1].genre_ids[0], username)">Save to Favourites</button>
+   <a href="/#reviewsTable"><button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 40%; float: right; font-size: 1em; background-color: blue; color: white; font-family:Arial, Helvetica, sans-serif"
+   *ngIf="data" (click)="viewReviews(recommended.results[1].id, recommended.results[1].title)">Reviews for {{recommended.results[1].title}}</button></a>
+   <button *ngIf="isPremium == true" class="btn btn-default" style="margin-top: 1em; margin-left: 1em; display: inline-block; width: 95%; float: left; font-size: 1em; background-color: rgb(0, 0, 0); color: white; font-family:Arial, Helvetica, sans-serif"
+   (click)="sendSmsMessage(username, recommended.results[1].title, recommended.results[1].release_date, recommended.results[1].overview)">Send SMS with information for {{recommended.results[1].title}}</button>
+   <br><br><br>
+        <p *ngIf="isPremium != true" style="font-size: 1.5em; color: goldenrod; text-align: center; background-color: white; border: .10em solid black; padding: 1em"><b>Go Premium to access SMS Functionality</b></p>
+</td>
+</tr>
+  
+<tr class="recommendedResultsTable">
+ <td class="dataFont" *ngIf="data"><b>{{recommended.results[2].title}}</b><br> <img src="https://image.tmdb.org/t/p/w185/{{recommended.results[2].poster_path}}" style="border:.10em solid black; margin-top: 1em"></td>
+ <td class="dataFont" *ngIf="data">{{recommended.results[2].overview}}</td>
+ <td class="dataFont" *ngIf="data">{{recommended.results[2].release_date}}</td>
+ <td *ngIf="isValid == true && accountExists == true"><h2 *ngIf="data" [(ngModel)]="movie_id" style="text-align: center"><b>Review {{recommended.results[2].title}}</b></h2>
+   <textarea type="text" [(ngModel)]="reviewText12" rows="10" cols="50" style="width: 100%" placeholder="Review..."></textarea>
+   <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 20%; float: left; font-size: 1em; background-color: green; color: white; font-family:Arial, Helvetica, sans-serif" 
+   *ngIf="data" (click)="addReview(recommended.results[2].id, recommended.results[2].title, username, reviewText12)">Make Review</button>
+   <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 27.5%; float: left; font-size: 1em; background-color: rgb(230, 6, 43); color: white; font-family:Arial, Helvetica, sans-serif" 
+   *ngIf="data" (click)="addToFavourites(username, recommended.results[2].id, recommended.results[2].title, recommended.results[2].poster_path, recommended.results[2].release_date);
+   addToSearchHistory(recommended.results[2].id, recommended.results[2].title, recommended.results[2].genre_ids[0], username)">Save to Favourites</button>
+   <a href="/#reviewsTable"><button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 40%; float: right; font-size: 1em; background-color: blue; color: white; font-family:Arial, Helvetica, sans-serif"
+   *ngIf="data" (click)="viewReviews(recommended.results[2].id, recommended.results[2].title)">Reviews for {{recommended.results[2].title}}</button></a>
+   <button *ngIf="isPremium == true" class="btn btn-default" style="margin-top: 1em; margin-left: 1em; display: inline-block; width: 95%; float: left; font-size: 1em; background-color: rgb(0, 0, 0); color: white; font-family:Arial, Helvetica, sans-serif"
+   (click)="sendSmsMessage(username, recommended.results[2].title, recommended.results[2].release_date, recommended.results[2].overview)">Send SMS with information for {{recommended.results[2].title}}</button>
+   <br><br><br>
+        <p *ngIf="isPremium != true" style="font-size: 1.5em; color: goldenrod; text-align: center; background-color: white; border: .10em solid black; padding: 1em"><b>Go Premium to access SMS Functionality</b></p>
+</td>
+</tr>
+
+<tr class="recommendedResultsTable">
+ <td class="dataFont" *ngIf="data"><b>{{recommended.results[3].title}}</b><br> <img src="https://image.tmdb.org/t/p/w185/{{recommended.results[3].poster_path}}" style="border:.10em solid black; margin-top: 1em"></td>
+ <td class="dataFont" *ngIf="data">{{recommended.results[3].overview}}</td>
+ <td class="dataFont" *ngIf="data">{{recommended.results[3].release_date}}</td>
+ <td *ngIf="isValid == true && accountExists == true"><h2 *ngIf="data" [(ngModel)]="movie_id" style="text-align: center"><b>Review {{recommended.results[3].title}}</b></h2>
+   <textarea type="text" [(ngModel)]="reviewText13" rows="10" cols="50" style="width: 100%" placeholder="Review..."></textarea>
+   <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 20%; float: left; font-size: 1em; background-color: green; color: white; font-family:Arial, Helvetica, sans-serif" 
+   *ngIf="data" (click)="addReview(recommended.results[3].id, recommended.results[3].title, username, reviewText13)">Make Review</button>
+   <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 27.5%; float: left; font-size: 1em; background-color: rgb(230, 6, 43); color: white; font-family:Arial, Helvetica, sans-serif" 
+   *ngIf="data" (click)="addToFavourites(username, recommended.results[3].id, recommended.results[3].title, recommended.results[3].poster_path, recommended.results[3].release_date);
+   addToSearchHistory(recommended.results[3].id, recommended.results[3].title, recommended.results[3].genre_ids[0], username)">Save to Favourites</button>
+   <a href="/#reviewsTable"><button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 40%; float: right; font-size: 1em; background-color: blue; color: white; font-family:Arial, Helvetica, sans-serif"
+   *ngIf="data" (click)="viewReviews(recommended.results[3].id, recommended.results[3].title)">Reviews for {{recommended.results[3].title}}</button></a>
+   <button *ngIf="isPremium == true" class="btn btn-default" style="margin-top: 1em; margin-left: 1em; display: inline-block; width: 95%; float: left; font-size: 1em; background-color: rgb(0, 0, 0); color: white; font-family:Arial, Helvetica, sans-serif"
+   (click)="sendSmsMessage(username, recommended.results[3].title, recommended.results[3].release_date, recommended.results[3].overview)">Send SMS with information for {{recommended.results[3].title}}</button>
+   <br><br><br>
+        <p *ngIf="isPremium != true" style="font-size: 1.5em; color: goldenrod; text-align: center; background-color: white; border: .10em solid black; padding: 1em"><b>Go Premium to access SMS Functionality</b></p>
+</td>
+</tr>
+
+<tr class="recommendedResultsTable">
+ <td class="dataFont" *ngIf="data"><b>{{recommended.results[4].title}}</b><br> <img src="https://image.tmdb.org/t/p/w185/{{recommended.results[4].poster_path}}" style="border:.10em solid black; margin-top: 1em"></td>
+ <td class="dataFont" *ngIf="data">{{recommended.results[4].overview}}</td>
+ <td class="dataFont" *ngIf="data">{{recommended.results[4].release_date}}</td>
+ <td *ngIf="isValid == true && accountExists == true"><h2 *ngIf="data" [(ngModel)]="movie_id" style="text-align: center"><b>Review {{recommended.results[4].title}}</b></h2>
+   <textarea type="text" [(ngModel)]="reviewText14" rows="10" cols="50" style="width: 100%" placeholder="Review..."></textarea>
+   <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 20%; float: left; font-size: 1em; background-color: green; color: white; font-family:Arial, Helvetica, sans-serif" 
+   *ngIf="data" (click)="addReview(recommended.results[4].id, recommended.results[4].title, username, reviewText14)">Make Review</button>
+   <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 27.5%; float: left; font-size: 1em; background-color: rgb(230, 6, 43); color: white; font-family:Arial, Helvetica, sans-serif" 
+   *ngIf="data" (click)="addToFavourites(username, recommended.results[4].id, recommended.results[4].title, recommended.results[4].poster_path, recommended.results[4].release_date);
+   addToSearchHistory(recommended.results[4].id, recommended.results[4].title, recommended.results[4].genre_ids[0], username)">Save to Favourites</button>
+   <a href="/#reviewsTable"><button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 40%; float: right; font-size: 1em; background-color: blue; color: white; font-family:Arial, Helvetica, sans-serif"
+   *ngIf="data" (click)="viewReviews(recommended.results[4].id, recommended.results[4].title)">Reviews for {{recommended.results[4].title}}</button></a>
+   <button *ngIf="isPremium == true" class="btn btn-default" style="margin-top: 1em; margin-left: 1em; display: inline-block; width: 95%; float: left; font-size: 1em; background-color: rgb(0, 0, 0); color: white; font-family:Arial, Helvetica, sans-serif"
+   (click)="sendSmsMessage(username, recommended.results[4].title, recommended.results[4].release_date, recommended.results[4].overview)">Send SMS with information for {{recommended.results[4].title}}</button>
+   <br><br><br>
+        <p *ngIf="isPremium != true" style="font-size: 1.5em; color: goldenrod; text-align: center; background-color: white; border: .10em solid black; padding: 1em"><b>Go Premium to access SMS Functionality</b></p>
+</td>
+</tr>
+
+<tr class="recommendedResultsTable">
+ <td class="dataFont" *ngIf="data"><b>{{recommended.results[5].title}}</b><br> <img src="https://image.tmdb.org/t/p/w185/{{recommended.results[5].poster_path}}" style="border:.10em solid black; margin-top: 1em"></td>
+ <td class="dataFont" *ngIf="data">{{recommended.results[5].overview}}</td>
+ <td class="dataFont" *ngIf="data">{{recommended.results[5].release_date}}</td>
+ <td *ngIf="isValid == true && accountExists == true"><h2 *ngIf="data" [(ngModel)]="movie_id" style="text-align: center"><b>Review {{recommended.results[5].title}}</b></h2>
+   <textarea type="text" [(ngModel)]="reviewText15" rows="10" cols="50" style="width: 100%" placeholder="Review..."></textarea>
+   <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 20%; float: left; font-size: 1em; background-color: green; color: white; font-family:Arial, Helvetica, sans-serif" 
+   *ngIf="data" (click)="addReview(recommended.results[5].id, recommended.results[5].title, username, reviewText15)">Make Review</button>
+   <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 27.5%; float: left; font-size: 1em; background-color: rgb(230, 6, 43); color: white; font-family:Arial, Helvetica, sans-serif" 
+   *ngIf="data" (click)="addToFavourites(username, recommended.results[5].id, recommended.results[5].title, recommended.results[5].poster_path, recommended.results[5].release_date);
+   addToSearchHistory(recommended.results[5].id, recommended.results[5].title, recommended.results[5].genre_ids[0], username)">Save to Favourites</button>
+   <a href="/#reviewsTable"><button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 40%; float: right; font-size: 1em; background-color: blue; color: white; font-family:Arial, Helvetica, sans-serif"
+   *ngIf="data" (click)="viewReviews(recommended.results[5].id, recommended.results[5].title)">Reviews for {{recommended.results[5].title}}</button></a>
+   <button *ngIf="isPremium == true" class="btn btn-default" style="margin-top: 1em; margin-left: 1em; display: inline-block; width: 95%; float: left; font-size: 1em; background-color: rgb(0, 0, 0); color: white; font-family:Arial, Helvetica, sans-serif"
+   (click)="sendSmsMessage(username, recommended.results[5].title, recommended.results[5].release_date, recommended.results[5].overview)">Send SMS with information for {{recommended.results[5].title}}</button>
+   <br><br><br>
+        <p *ngIf="isPremium != true" style="font-size: 1.5em; color: goldenrod; text-align: center; background-color: white; border: .10em solid black; padding: 1em"><b>Go Premium to access SMS Functionality</b></p>
+</td>
+</tr>
+
+<tr class="recommendedResultsTable">
+ <td class="dataFont" *ngIf="data"><b>{{recommended.results[6].title}}</b><br> <img src="https://image.tmdb.org/t/p/w185/{{recommended.results[6].poster_path}}" style="border:.10em solid black; margin-top: 1em"></td>
+ <td class="dataFont" *ngIf="data">{{recommended.results[6].overview}}</td>
+ <td class="dataFont" *ngIf="data">{{recommended.results[6].release_date}}</td>
+ <td *ngIf="isValid == true && accountExists == true"><h2 *ngIf="data" [(ngModel)]="movie_id" style="text-align: center"><b>Review {{recommended.results[6].title}}</b></h2>
+   <textarea type="text" [(ngModel)]="reviewText16" rows="10" cols="50" style="width: 100%" placeholder="Review..."></textarea>
+   <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 20%; float: left; font-size: 1em; background-color: green; color: white; font-family:Arial, Helvetica, sans-serif" 
+   *ngIf="data" (click)="addReview(recommended.results[6].id, recommended.results[6].title, username, reviewText16)">Make Review</button>
+   <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 27.5%; float: left; font-size: 1em; background-color: rgb(230, 6, 43); color: white; font-family:Arial, Helvetica, sans-serif" 
+   *ngIf="data" (click)="addToFavourites(username, recommended.results[6].id, recommended.results[6].title, recommended.results[6].poster_path, recommended.results[6].release_date);
+   addToSearchHistory(recommended.results[6].id, recommended.results[6].title, recommended.results[6].genre_ids[0], username)">Save to Favourites</button>
+   <a href="/#reviewsTable"><button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 40%; float: right; font-size: 1em; background-color: blue; color: white; font-family:Arial, Helvetica, sans-serif"
+   *ngIf="data" (click)="viewReviews(recommended.results[6].id, recommended.results[6].title)">Reviews for {{recommended.results[6].title}}</button></a>
+   <button *ngIf="isPremium == true" class="btn btn-default" style="margin-top: 1em; margin-left: 1em; display: inline-block; width: 95%; float: left; font-size: 1em; background-color: rgb(0, 0, 0); color: white; font-family:Arial, Helvetica, sans-serif"
+   (click)="sendSmsMessage(username, recommended.results[6].title, recommended.results[6].release_date, recommended.results[6].overview)">Send SMS with information for {{recommended.results[6].title}}</button>
+   <br><br><br>
+        <p *ngIf="isPremium != true" style="font-size: 1.5em; color: goldenrod; text-align: center; background-color: white; border: .10em solid black; padding: 1em"><b>Go Premium to access SMS Functionality</b></p>
+</td>
+</tr>
+
+<tr class="recommendedResultsTable">
+ <td class="dataFont" *ngIf="data"><b>{{recommended.results[7].title}}</b><br> <img src="https://image.tmdb.org/t/p/w185/{{recommended.results[7].poster_path}}" style="border:.10em solid black; margin-top: 1em"></td>
+ <td class="dataFont" *ngIf="data">{{recommended.results[7].overview}}</td>
+ <td class="dataFont" *ngIf="data">{{recommended.results[7].release_date}}</td>
+ <td *ngIf="isValid == true && accountExists == true"><h2 *ngIf="data" [(ngModel)]="movie_id" style="text-align: center"><b>Review {{recommended.results[7].title}}</b></h2>
+   <textarea type="text" [(ngModel)]="reviewText17" rows="10" cols="50" style="width: 100%" placeholder="Review..."></textarea>
+   <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 20%; float: left; font-size: 1em; background-color: green; color: white; font-family:Arial, Helvetica, sans-serif" 
+   *ngIf="data" (click)="addReview(recommended.results[7].id, recommended.results[7].title, username, reviewText17)">Make Review</button>
+   <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 27.5%; float: left; font-size: 1em; background-color: rgb(230, 6, 43); color: white; font-family:Arial, Helvetica, sans-serif" 
+   *ngIf="data" (click)="addToFavourites(username, recommended.results[7].id, recommended.results[7].title, recommended.results[7].poster_path, recommended.results[7].release_date);
+   addToSearchHistory(recommended.results[7].id, recommended.results[7].title, recommended.results[7].genre_ids[0], username)">Save to Favourites</button>
+   <a href="/#reviewsTable"><button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 40%; float: right; font-size: 1em; background-color: blue; color: white; font-family:Arial, Helvetica, sans-serif"
+   (click)="viewReviews(recommended.results[7].id, recommended.results[7].title)">Reviews for {{recommended.results[7].title}}</button></a>
+   <button *ngIf="isPremium == true" class="btn btn-default" style="margin-top: 1em; margin-left: 1em; display: inline-block; width: 95%; float: left; font-size: 1em; background-color: rgb(0, 0, 0); color: white; font-family:Arial, Helvetica, sans-serif"
+   (click)="sendSmsMessage(username, recommended.results[7].title, recommended.results[7].release_date, recommended.results[7].overview)">Send SMS with information for {{recommended.results[7].title}}</button>
+   <br><br><br>
+        <p *ngIf="isPremium != true" style="font-size: 1.5em; color: goldenrod; text-align: center; background-color: white; border: .10em solid black; padding: 1em"><b>Go Premium to access SMS Functionality</b></p>
+</td>
+</tr>
+
+<tr class="recommendedResultsTable">
+ <td class="dataFont" *ngIf="data"><b>{{recommended.results[8].title}}</b><br> <img src="https://image.tmdb.org/t/p/w185/{{recommended.results[8].poster_path}}" style="border:.10em solid black; margin-top: 1em"></td>
+ <td class="dataFont" *ngIf="data">{{recommended.results[8].overview}}</td>
+ <td class="dataFont" *ngIf="data">{{recommended.results[8].release_date}}</td>
+ <td *ngIf="isValid == true && accountExists == true"><h2 *ngIf="data" [(ngModel)]="movie_id" style="text-align: center"><b>Review {{recommended.results[8].title}}</b></h2>
+   <textarea type="text" [(ngModel)]="reviewText18" rows="10" cols="50" style="width: 100%" placeholder="Review..."></textarea>
+   <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 20%; float: left; font-size: 1em; background-color: green; color: white; font-family:Arial, Helvetica, sans-serif" 
+   *ngIf="data" (click)="addReview(recommended.results[8].id, recommended.results[8].title, username, reviewText18)">Make Review</button>
+   <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 27.5%; float: left; font-size: 1em; background-color: rgb(230, 6, 43); color: white; font-family:Arial, Helvetica, sans-serif" 
+   *ngIf="data" (click)="addToFavourites(username, recommended.results[8].id, recommended.results[8].title, recommended.results[8].poster_path, recommended.results[8].release_date);
+   addToSearchHistory(recommended.results[8].id, recommended.results[8].title, recommended.results[8].genre_ids[0], username)">Save to Favourites</button>
+   <a href="/#reviewsTable"><button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 40%; float: right; font-size: 1em; background-color: blue; color: white; font-family:Arial, Helvetica, sans-serif"
+   (click)="viewReviews(recommended.results[8].id, recommended.results[8].title)">Reviews for {{recommended.results[8].title}}</button></a>
+   <button *ngIf="isPremium == true" class="btn btn-default" style="margin-top: 1em; margin-left: 1em; display: inline-block; width: 95%; float: left; font-size: 1em; background-color: rgb(0, 0, 0); color: white; font-family:Arial, Helvetica, sans-serif"
+   (click)="sendSmsMessage(username, recommended.results[8].title, recommended.results[8].release_date, recommended.results[8].overview)">Send SMS with information for {{recommended.results[8].title}}</button>
+   <br><br><br>
+        <p *ngIf="isPremium != true" style="font-size: 1.5em; color: goldenrod; text-align: center; background-color: white; border: .10em solid black; padding: 1em"><b>Go Premium to access SMS Functionality</b></p>
+</td>
+</tr>
+
+<tr class="recommendedResultsTable">
+ <td class="dataFont" *ngIf="data"><b>{{recommended.results[9].title}}</b><br> <img src="https://image.tmdb.org/t/p/w185/{{recommended.results[9].poster_path}}" style="border:.10em solid black; margin-top: 1em"></td>
+ <td class="dataFont" *ngIf="data">{{recommended.results[9].overview}}</td>
+ <td class="dataFont" *ngIf="data">{{recommended.results[9].release_date}}</td>
+ <td *ngIf="isValid == true && accountExists == true"><h2 *ngIf="data" [(ngModel)]="movie_id" style="text-align: center"><b>Review {{recommended.results[9].title}}</b></h2>
+   <textarea type="text" [(ngModel)]="reviewText19" rows="10" cols="50" style="width: 100%" placeholder="Review..."></textarea>
+   <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 20%; float: left; font-size: 1em; background-color: green; color: white; font-family:Arial, Helvetica, sans-serif" 
+   *ngIf="data" (click)="addReview(recommended.results[9].id, recommended.results[9].title, username, reviewText19)">Make Review</button>
+   <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 27.5%; float: left; font-size: 1em; background-color: rgb(230, 6, 43); color: white; font-family:Arial, Helvetica, sans-serif" 
+   *ngIf="data" (click)="addToFavourites(username, recommended.results[9].id, recommended.results[9].title, recommended.results[9].poster_path, recommended.results[9].release_date);
+   addToSearchHistory(recommended.results[9].id, recommended.results[9].title, recommended.results[9].genre_ids[0], username)">Save to Favourites</button>
+   <a href="/#reviewsTable"><button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 40%; float: right; font-size: 1em; background-color: blue; color: white; font-family:Arial, Helvetica, sans-serif"
+   *ngIf="data" (click)="viewReviews(recommended.results[9].id, recommended.results[9].title)">Reviews for {{recommended.results[9].title}}</button></a>
+   <button *ngIf="isPremium == true" class="btn btn-default" style="margin-top: 1em; margin-left: 1em; display: inline-block; width: 95%; float: left; font-size: 1em; background-color: rgb(0, 0, 0); color: white; font-family:Arial, Helvetica, sans-serif"
+   (click)="sendSmsMessage(username, recommended.results[9].title, recommended.results[9].release_date, recommended.results[9].overview)">Send SMS with information for {{recommended.results[9].title}}</button>
+   <br><br><br>
+        <p *ngIf="isPremium != true" style="font-size: 1.5em; color: goldenrod; text-align: center; background-color: white; border: .10em solid black; padding: 1em"><b>Go Premium to access SMS Functionality</b></p>
+</td>
+</tr>
+  
+  </table>
+  </div>
+
+<div id="searchByname" *ngIf="actorsTableVisible == true" style="padding-bottom: 5em; border-bottom: .2em solid black">
+        <h2 style="background-color: white; padding:.25em; border:.10em solid black; text-align: center"><b>Search for your favourite Actor!</b></h2>
+    <table style="width: 100%; display: inline-block; border:.10em solid black">
+      <tr>
+        <th class="" style="text-align: center">Actor Details</th>
+        <th class="moviesData" style="text-align: center">Movies</th>
+      </tr>
+    
+      <tr class="resultsTable">
+        <td class="dataFont" *ngIf="data"><b>{{fullname.results[0].name}}</b><br> <img src="https://image.tmdb.org/t/p/w185/{{fullname.results[0].profile_path}}" style="border:.10em solid black; margin-top: 1em"><br><br>
+        Popularity: {{fullname.results[0].popularity}}<br>
+        Actor ID: {{fullname.results[0].id}}</td>
+        <div class="rows" style="width:165.25em">
+                <div class="column" style="margin-left:15em; margin-top: 5em">
+                    <td class="" *ngIf="data"><img src="https://image.tmdb.org/t/p/w185/{{fullname.results[0].known_for[0].poster_path}}">
+                </td>
+            </div>
+            <div class="column" style="margin-left:15em; margin-top: 5em">
+                    <td class="" *ngIf="data"><img src="https://image.tmdb.org/t/p/w185/{{fullname.results[0].known_for[1].poster_path}}">
+                </td>
+            </div>
+            <div class="column" style="margin-left:15em; margin-top: 5em">
+                    <td class="" *ngIf="data"><img src="https://image.tmdb.org/t/p/w185/{{fullname.results[0].known_for[2].poster_path}}">
+                </td>
+            </div>
+            </div>
+        </tr>
+    </table>
+    
+    <table style="width: 100%; display: inline-block">
+      <tr id="searchByNameTable">
+            <th class="title">Movie Title</th>
+            <th class="genericData">Description</th>
+            <th class="description">Release Date</th>
+            <th *ngIf="isValid == true && accountExists == true" class="reviewTextField" style="font-size: 1.25em; font-family:Arial, Helvetica, sans-serif">Review</th>
+          </tr>
+    
+       <tr class="resultsTable">
+        <td class="dataFont" *ngIf="data"><b>{{fullname.results[0].known_for[0].title}}</b><br> <img src="https://image.tmdb.org/t/p/w185/{{fullname.results[0].known_for[0].poster_path}}" style="border:.10em solid black; margin-top: 1em"></td>
+        <td class="dataFont" *ngIf="data">{{fullname.results[0].known_for[0].overview}}</td>
+        <td class="dataFont" *ngIf="data">{{fullname.results[0].known_for[0].release_date}}</td>
+        <td *ngIf="isValid == true && accountExists == true"><h2 *ngIf="data" [(ngModel)]="movie_id" style="text-align: center"><b>Review {{fullname.results[0].known_for[0].title}}</b></h2>
+            <textarea type="text" [(ngModel)]="reviewText20" rows="10" cols="50" style="width: 100%" placeholder="Review..."></textarea>
+            <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 20%; float: left; font-size: 1em; background-color: green; color: white; font-family:Arial, Helvetica, sans-serif" 
+            *ngIf="data" (click)="addReview(fullname.results[0].known_for[0].id, fullname.results[0].known_for[0].title, username, reviewText20)">Make Review</button>
+            <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 27.5%; float: left; font-size: 1em; background-color: rgb(230, 6, 43); color: white; font-family:Arial, Helvetica, sans-serif" 
+            *ngIf="data" (click)="addToFavourites(username, fullname.results[0].known_for[0].id, fullname.results[0].known_for[0].title, fullname.results[0].known_for[0].poster_path, fullname.results[0].known_for[0].release_date); 
+            addToSearchHistory(fullname.results[0].known_for[0].id, fullname.results[0].known_for[0].title, fullname.results[0].known_for[0].genre_ids[0], username)">Save to Favourites</button>
+            <a href="/#reviewsTable"><button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 40%; float: right; font-size: 1em; background-color: blue; color: white; font-family:Arial, Helvetica, sans-serif"
+            *ngIf="data" (click)="viewReviews(fullname.results[0].known_for[0].id, fullname.results[0].known_for[0].title)">Reviews for {{fullname.results[0].known_for[0].title}}</button></a>
+            <button *ngIf="isPremium == true" class="btn btn-default" style="margin-top: 1em; margin-left: 1em; display: inline-block; width: 95%; float: left; font-size: 1em; background-color: rgb(0, 0, 0); color: white; font-family:Arial, Helvetica, sans-serif"
+            (click)="sendSmsMessage(username, fullname.results[0].known_for[0].title, fullname.results[0].known_for[0].release_date, fullname.results[0].known_for[0].overview)">Send SMS with information for {{fullname.results[0].known_for[0].title}}</button>
+            <br><br><br>
+        <p *ngIf="isPremium != true" style="font-size: 1.5em; color: goldenrod; text-align: center; background-color: white; border: .10em solid black; padding: 1em"><b>Go Premium to access SMS Functionality</b></p>
+        </td>
+    </tr>
+    
+    <tr class="resultsTable">
+        <td class="dataFont" *ngIf="data"><b>{{fullname.results[0].known_for[1].title}}</b><br> <img src="https://image.tmdb.org/t/p/w185/{{fullname.results[0].known_for[1].poster_path}}" style="border:.10em solid black; margin-top: 1em"></td>
+        <td class="dataFont" *ngIf="data">{{fullname.results[0].known_for[1].overview}}</td>
+        <td class="dataFont" *ngIf="data">{{fullname.results[0].known_for[1].release_date}}</td>
+        <td *ngIf="isValid == true && accountExists == true"><h2 *ngIf="data" [(ngModel)]="movie_id" style="text-align: center"><b>Review {{fullname.results[0].known_for[1].title}}</b></h2>
+            <textarea type="text" [(ngModel)]="reviewText21" rows="10" cols="50" style="width: 100%" placeholder="Review..."></textarea>
+            <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 20%; float: left; font-size: 1em; background-color: green; color: white; font-family:Arial, Helvetica, sans-serif" 
+            *ngIf="data" (click)="addReview(fullname.results[0].known_for[1].id, fullname.results[0].known_for[1].title, username, reviewText21)">Make Review</button>
+            <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 27.5%; float: left; font-size: 1em; background-color: rgb(230, 6, 43); color: white; font-family:Arial, Helvetica, sans-serif" 
+            *ngIf="data" (click)="addToFavourites(username, fullname.results[0].known_for[1].id, fullname.results[0].known_for[1].title, fullname.results[0].known_for[1].poster_path, fullname.results[0].known_for[1].release_date);
+            addToSearchHistory(fullname.results[0].known_for[1].id, fullname.results[0].known_for[1].title, fullname.results[0].known_for[1].genre_ids[0], username)">Save to Favourites</button>
+            <a href="/#reviewsTable"><button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 40%; float: right; font-size: 1em; background-color: blue; color: white; font-family:Arial, Helvetica, sans-serif"
+            *ngIf="data" (click)="viewReviews(fullname.results[0].known_for[1].id, fullname.results[0].known_for[1].title)">Reviews for {{fullname.results[0].known_for[1].title}}</button></a>
+            <button *ngIf="isPremium == true" class="btn btn-default" style="margin-top: 1em; margin-left: 1em; display: inline-block; width: 95%; float: left; font-size: 1em; background-color: rgb(0, 0, 0); color: white; font-family:Arial, Helvetica, sans-serif"
+            (click)="sendSmsMessage(username, fullname.results[0].known_for[1].title, fullname.results[0].known_for[1].release_date, fullname.results[0].known_for[1].overview)">Send SMS with information for {{fullname.results[0].known_for[1].title}}</button>
+            <br><br><br>
+        <p *ngIf="isPremium != true" style="font-size: 1.5em; color: goldenrod; text-align: center; background-color: white; border: .10em solid black; padding: 1em"><b>Go Premium to access SMS Functionality</b></p>
+        </td>
+    </tr>
+    
+    <tr class="resultsTable">
+        <td class="dataFont" *ngIf="data"><b>{{fullname.results[0].known_for[2].title}}</b><br> <img src="https://image.tmdb.org/t/p/w185/{{fullname.results[0].known_for[2].poster_path}}" style="border:.10em solid black; margin-top: 1em"></td>
+        <td class="dataFont" *ngIf="data">{{fullname.results[0].known_for[2].overview}}</td>
+        <td class="dataFont" *ngIf="data">{{fullname.results[0].known_for[2].release_date}}</td>
+        <td *ngIf="isValid == true && accountExists == true"><h2 *ngIf="data" [(ngModel)]="movie_id" style="text-align: center"><b>Review {{fullname.results[0].known_for[2].title}}</b></h2>
+            <textarea type="text" [(ngModel)]="reviewText22" rows="10" cols="50" style="width: 100%" placeholder="Review..."></textarea>
+            <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 20%; float: left; font-size: 1em; background-color: green; color: white; font-family:Arial, Helvetica, sans-serif" 
+            *ngIf="data" (click)="addReview(fullname.results[0].known_for[2].id, fullname.results[0].known_for[2].title, username, reviewText22)">Make Review</button>
+            <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 27.5%; float: left; font-size: 1em; background-color: rgb(230, 6, 43); color: white; font-family:Arial, Helvetica, sans-serif" 
+            *ngIf="data" (click)="addToFavourites(username, fullname.results[0].known_for[2].id, fullname.results[0].known_for[2].title, fullname.results[0].known_for[2].poster_path, fullname.results[0].known_for[2].release_date);
+            addToSearchHistory(fullname.results[0].known_for[2].id, fullname.results[0].known_for[2].title, fullname.results[0].known_for[2].genre_ids[0], username)">Save to Favourites</button>
+            <a href="/#reviewsTable"><button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 40%; float: right; font-size: 1em; background-color: blue; color: white; font-family:Arial, Helvetica, sans-serif"
+            *ngIf="data" (click)="viewReviews(fullname.results[0].known_for[2].id, fullname.results[0].known_for[2].title)">Reviews for {{fullname.results[0].known_for[2].title}}</button></a>
+            <button *ngIf="isPremium == true" class="btn btn-default" style="margin-top: 1em; margin-left: 1em; display: inline-block; width: 95%; float: left; font-size: 1em; background-color: rgb(0, 0, 0); color: white; font-family:Arial, Helvetica, sans-serif"
+            (click)="sendSmsMessage(username, fullname.results[0].known_for[2].title, fullname.results[0].known_for[2].release_date, fullname.results[0].known_for[2].overview)">Send SMS with information for {{fullname.results[0].known_for[2].title}}</button>
+            <br><br><br>
+        <p *ngIf="isPremium != true" style="font-size: 1.5em; color: goldenrod; text-align: center; background-color: white; border: .10em solid black; padding: 1em"><b>Go Premium to access SMS Functionality</b></p>
+        </td>
+    </tr>
+    
+    </table>
+    </div>
+
+    <div id="actor"></div>
+
+    <div id="reviewsTable" *ngIf="reviewsTableVisible == true">
+        <div class="container">
+            <h1 style="color:red; text-align: center"><b>All Reviews</b></h1>
+    
+            <h2 style="background-color: white; padding:.25em; border:.10em solid black; text-align: center; font-family:Arial, Helvetica, sans-serif"><b>View Reviews made by Users!</b></h2>
+            <table class="table" style="display: inline-block">
+                <tr>
+                    <th class="title" style="font-size: 1.5em;">Review No.</th>
+                    <th class="title" style="font-size: 1.5em;">Movie</th>
+                    <th class="genericData" style="font-size: 1.5em;">Username</th>
+                    <th style="width: 60em; font-size: 1.5em;">Review</th>
+                    <th class="description" style="font-size: 1.5em;">Date</th>
+                </tr>
+            
+                <tbody>
+                <tr *ngFor="let review of reviewsByMovieID">
+                    <td style="font-size: 1.25em"><b>{{review.id}}</b></td>
+                    <td style="font-size: 1.25em"><b>{{review.movie_name}}</b></td>
+                    <td style="font-size: 1.25em"><b>{{review.username}}</b></td>
+                    <td style="font-size: 1.25em"><b>{{review.reviewText}}</b></td>
+                    <td style="font-size: 1.25em"><b>{{review.reviewDate}}</b></td>
+                </tr>
+                </tbody>
+            </table>
+            
+            </div>   
+    </div>
+
+    <div id="revTable"></div>
+
+    <div id="favouritesTable" *ngIf="favouritesTableVisible == true">
+        <div class="container">
+            <h1 style="color: red; text-align:center"><b>{{username}}'s Favourite Movies</b></h1>
+
+            <table class="table" style="display: inline-block">
+                    <tr>
+                        <th class="title" style="font-size: 1.5em;">Movie Title</th>
+                        <th class="releaseDateColumn" style="font-size: 1.5em;">Release Date</th>
+                        <th *ngIf="isValid == true && accountExists == true" class="reviewTextField" style="font-size: 1.25em; font-family:Arial, Helvetica, sans-serif">Review</th>
+                        <th class="releaseDateColumn" style="font-size: 1.5em">Remove from Favourites</th>
+                    </tr>
+                
+                    <tbody>
+                    <tr *ngFor="let favourite of favouritesByUsername">
+                        <td class="dataFont" *ngIf="data"><b>{{favourite.title}}</b><br> <img src="https://image.tmdb.org/t/p/w185/{{favourite.poster_path}}" style="border:.10em solid black; margin-top: 1em"></td>
+                        <td class="dataFont" *ngIf="data"><b>{{favourite.release_date}}</b></td>
+                        <td *ngIf="isValid == true && accountExists == true"><h2 *ngIf="data" [(ngModel)]="movie_id" style="text-align: center"><b>Review {{favourite.title}}</b></h2>
+                            <textarea type="text" [(ngModel)]="reviewText23" rows="10" cols="50" style="width: 100%" placeholder="Review..."></textarea>
+                            <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 20%; float: left; font-size: 1em; background-color: green; color: white; font-family:Arial, Helvetica, sans-serif" 
+                            *ngIf="data" (click)="addReview(favourite.movie_id, favourite.title, username, reviewText23)">Make Review</button>
+                            <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 27.5%; float: left; font-size: 1em; background-color: rgb(230, 6, 43); color: white; font-family:Arial, Helvetica, sans-serif" 
+                            *ngIf="data" (click)="addToFavourites(username, favourite.movie_id, favourite.title, favourite.poster_path, favourite.release_date)">Save to Favourites</button>
+                            <a href="/#reviewsTable"><button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 40%; float: right; font-size: 1em; background-color: blue; color: white; font-family:Arial, Helvetica, sans-serif"
+                            *ngIf="data" (click)="viewReviews(favourite.movie_id, favourite.title)">Reviews for {{favourite.title}}</button></a>
+                            <button *ngIf="isPremium == true" class="btn btn-default" style="margin-top: 1em; margin-left: 1em; display: inline-block; width: 95%; float: left; font-size: 1em; background-color: rgb(0, 0, 0); color: white; font-family:Arial, Helvetica, sans-serif"
+                            (click)="sendSmsMessage(username, favourite.title, favourite.release_date, favourite.overview)">Send SMS with information for {{favourite.title}}</button>
+                            <br><br><br>
+                            <p *ngIf="isPremium != true" style="font-size: 1.5em; color: goldenrod; text-align: center; background-color: white; border: .10em solid black; padding: 1em"><b>Go Premium to access SMS Functionality</b></p>
+                        </td>
+                        <td class="dataFont" *ngIf="data"><button class="btn btn-danger" (click)="deleteFavourite(favourite)">Remove</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+        </div>
+
+    </div>
+
+<div id="searchByGenre" *ngIf="genresTableVisible == true" style="padding-bottom: 2em;">
+    <h2 style="background-color: white; padding:.25em; border:.10em solid black; text-align: center; font-family:Arial, Helvetica, sans-serif; padding-top: 1em"><b>Filter your search based on Genre!</b></h2>
+<table style="width: 100%; display: inline-block">
+    <tr id="searchByGenreTable">
+          <th class="title">Movie Title</th>
+          <th class="genericData">Description</th>
+          <th class="description">Release Date</th>
+          <th *ngIf="isValid == true && accountExists == true" class="reviewTextField" style="font-size: 1.25em; font-family:Arial, Helvetica, sans-serif">Review</th>
+        </tr>
+  
+     <tr class="genreResultsTable">
+         {{genres.results[0].poster_path}}
+      <td class="dataFont" *ngIf="data"><b>{{genre.results[0].title}}</b><br> <img src="https://image.tmdb.org/t/p/w185/{{genre.results[0].poster_path}}" style="border:.10em solid black; margin-top: 1em"></td>
+      <td class="dataFont" *ngIf="data">{{genre.results[0].overview}}</td>
+      <td class="dataFont" *ngIf="data">{{genre.results[0].release_date}}</td>
+      <td *ngIf="isValid == true && accountExists == true"><h2 *ngIf="data" [(ngModel)]="movie_id" style="text-align: center"><b>Review {{genre.results[0].title}}</b></h2>
+        <textarea type="text" [(ngModel)]="reviewText24" rows="10" cols="50" style="width: 100%" placeholder="Review..."></textarea>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 20%; float: left; font-size: 1em; background-color: green; color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addReview(genre.results[0].id, genre.results[0].title, username, reviewText24)">Make Review</button>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 27.5%; float: left; font-size: 1em; background-color: rgb(230, 6, 43); color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addToFavourites(username, genre.results[0].id, genre.results[0].title, genre.results[0].poster_path, genre.results[0].release_date);
+        addToSearchHistory(genre.results[0].id, genre.results[0].title, genre.results[0].genre_ids[0], username)">Save to Favourites</button>
+        <a href="/#reviewsTable"><button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 40%; float: right; font-size: 1em; background-color: blue; color: white; font-family:Arial, Helvetica, sans-serif"
+        *ngIf="data" (click)="viewReviews(genre.results[0].id, genre.results[0].title)">Reviews for {{genre.results[0].title}}</button></a>
+        <button *ngIf="isPremium == true" class="btn btn-default" style="margin-top: 1em; margin-left: 1em; display: inline-block; width: 95%; float: left; font-size: 1em; background-color: rgb(0, 0, 0); color: white; font-family:Arial, Helvetica, sans-serif"
+        (click)="sendSmsMessage(username, genre.results[0].title, genre.results[0].release_date, genre.results[0].overview)">Send SMS with information for {{genre.results[0].title}}</button>
+        <br><br><br>
+        <p *ngIf="isPremium != true" style="font-size: 1.5em; color: goldenrod; text-align: center; background-color: white; border: .10em solid black; padding: 1em"><b>Go Premium to access SMS Functionality</b></p>
+    </td>
+  </tr>
+  
+  <tr class="genreResultsTable">
+      <td class="dataFont" *ngIf="data"><b>{{genre.results[1].title}}</b><br> <img src="https://image.tmdb.org/t/p/w185/{{genre.results[1].poster_path}}" style="border:.10em solid black; margin-top: 1em"></td>
+      <td class="dataFont" *ngIf="data">{{genre.results[1].overview}}</td>
+      <td class="dataFont" *ngIf="data">{{genre.results[1].release_date}}</td>
+      <td *ngIf="isValid == true && accountExists == true"><h2 *ngIf="data" [(ngModel)]="movie_id" style="text-align: center"><b>Review {{genre.results[1].title}}</b></h2>
+        <textarea type="text" [(ngModel)]="reviewText25" rows="10" cols="50" style="width: 100%" placeholder="Review..."></textarea>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 20%; float: left; font-size: 1em; background-color: green; color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addReview(genre.results[1].id, genre.results[1].title, username, reviewText25)">Make Review</button>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 27.5%; float: left; font-size: 1em; background-color: rgb(230, 6, 43); color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addToFavourites(username, genre.results[1].id, genre.results[1].title, genre.results[1].poster_path, genre.results[1].release_date);
+        addToSearchHistory(genre.results[1].id, genre.results[1].title, genre.results[1].genre_ids[0], username)">Save to Favourites</button>
+        <a href="/#reviewsTable"><button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 40%; float: right; font-size: 1em; background-color: blue; color: white; font-family:Arial, Helvetica, sans-serif"
+        *ngIf="data" (click)="viewReviews(genre.results[1].id, genre.results[1].title)">Reviews for {{genre.results[1].title}}</button></a>
+        <button *ngIf="isPremium == true" class="btn btn-default" style="margin-top: 1em; margin-left: 1em; display: inline-block; width: 95%; float: left; font-size: 1em; background-color: rgb(0, 0, 0); color: white; font-family:Arial, Helvetica, sans-serif"
+        (click)="sendSmsMessage(username, genre.results[1].title, genre.results[1].release_date, genre.results[1].overview)">Send SMS with information for {{genre.results[1].title}}</button>
+        <br><br><br>
+        <p *ngIf="isPremium != true" style="font-size: 1.5em; color: goldenrod; text-align: center; background-color: white; border: .10em solid black; padding: 1em"><b>Go Premium to access SMS Functionality</b></p>
+    </td>
+  </tr>
+  
+  <tr class="genreResultsTable">
+      <td class="dataFont" *ngIf="data"><b>{{genre.results[2].title}}</b><br> <img src="https://image.tmdb.org/t/p/w185/{{genre.results[2].poster_path}}" style="border:.10em solid black; margin-top: 1em"></td>
+      <td class="dataFont" *ngIf="data">{{genre.results[2].overview}}</td>
+      <td class="dataFont" *ngIf="data">{{genre.results[2].release_date}}</td>
+      <td *ngIf="isValid == true && accountExists == true"><h2 *ngIf="data" [(ngModel)]="movie_id" style="text-align: center"><b>Review {{genre.results[2].title}}</b></h2>
+        <textarea type="text" [(ngModel)]="reviewText26" rows="10" cols="50" style="width: 100%" placeholder="Review..."></textarea>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 20%; float: left; font-size: 1em; background-color: green; color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addReview(genre.results[2].id, genre.results[2].title, username, reviewText26)">Make Review</button>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 27.5%; float: left; font-size: 1em; background-color: rgb(230, 6, 43); color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addToFavourites(username, genre.results[2].id, genre.results[2].title, genre.results[2].poster_path, genre.results[2].release_date);
+        addToSearchHistory(genre.results[2].id, genre.results[2].title, genre.results[2].genre_ids[0], username)">Save to Favourites</button>
+        <a href="/#reviewsTable"><button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 40%; float: right; font-size: 1em; background-color: blue; color: white; font-family:Arial, Helvetica, sans-serif"
+        *ngIf="data" (click)="viewReviews(genre.results[2].id, genre.results[2].title)">Reviews for {{genre.results[2].title}}</button></a>
+        <button *ngIf="isPremium == true" class="btn btn-default" style="margin-top: 1em; margin-left: 1em; display: inline-block; width: 95%; float: left; font-size: 1em; background-color: rgb(0, 0, 0); color: white; font-family:Arial, Helvetica, sans-serif"
+        (click)="sendSmsMessage(username, genre.results[2].title, genre.results[2].release_date, genre.results[2].overview)">Send SMS with information for {{genre.results[2].title}}</button>
+        <br><br><br>
+        <p *ngIf="isPremium != true" style="font-size: 1.5em; color: goldenrod; text-align: center; background-color: white; border: .10em solid black; padding: 1em"><b>Go Premium to access SMS Functionality</b></p>
+    </td>
+  </tr>
+
+  <tr class="genreResultsTable">
+    <td class="dataFont" *ngIf="data"><b>{{genre.results[3].title}}</b><br> <img src="https://image.tmdb.org/t/p/w185/{{genre.results[3].poster_path}}" style="border:.10em solid black; margin-top: 1em"></td>
+    <td class="dataFont" *ngIf="data">{{genre.results[3].overview}}</td>
+    <td class="dataFont" *ngIf="data">{{genre.results[3].release_date}}</td>
+    <td *ngIf="isValid == true && accountExists == true"><h2 *ngIf="data" [(ngModel)]="movie_id" style="text-align: center"><b>Review {{genre.results[3].title}}</b></h2>
+        <textarea type="text" [(ngModel)]="reviewText27" rows="10" cols="50" style="width: 100%" placeholder="Review..."></textarea>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 20%; float: left; font-size: 1em; background-color: green; color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addReview(genre.results[3].id, genre.results[3].title, username, reviewText27)">Make Review</button>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 27.5%; float: left; font-size: 1em; background-color: rgb(230, 6, 43); color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addToFavourites(username, genre.results[3].id, genre.results[3].title, genre.results[3].poster_path, genre.results[3].release_date);
+        addToSearchHistory(genre.results[3].id, genre.results[3].title, genre.results[3].genre_ids[0], username)">Save to Favourites</button>
+        <a href="/#reviewsTable"><button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 40%; float: right; font-size: 1em; background-color: blue; color: white; font-family:Arial, Helvetica, sans-serif"
+        *ngIf="data" (click)="viewReviews(genre.results[3].id, genre.results[3].title)">Reviews for {{genre.results[3].title}}</button></a>
+        <button *ngIf="isPremium == true" class="btn btn-default" style="margin-top: 1em; margin-left: 1em; display: inline-block; width: 95%; float: left; font-size: 1em; background-color: rgb(0, 0, 0); color: white; font-family:Arial, Helvetica, sans-serif"
+        (click)="sendSmsMessage(username, genre.results[3].title, genre.results[3].release_date, genre.results[3].overview)">Send SMS with information for {{genre.results[3].title}}</button>
+        <br><br><br>
+        <p *ngIf="isPremium != true" style="font-size: 1.5em; color: goldenrod; text-align: center; background-color: white; border: .10em solid black; padding: 1em"><b>Go Premium to access SMS Functionality</b></p>
+    </td>
+</tr>
+
+<tr class="genreResultsTable">
+    <td class="dataFont" *ngIf="data"><b>{{genre.results[4].title}}</b><br> <img src="https://image.tmdb.org/t/p/w185/{{genre.results[4].poster_path}}" style="border:.10em solid black; margin-top: 1em"></td>
+    <td class="dataFont" *ngIf="data">{{genre.results[4].overview}}</td>
+    <td class="dataFont" *ngIf="data">{{genre.results[4].release_date}}</td>
+    <td *ngIf="isValid == true && accountExists == true"><h2 *ngIf="data" [(ngModel)]="movie_id" style="text-align: center"><b>Review {{genre.results[4].title}}</b></h2>
+        <textarea type="text" [(ngModel)]="reviewText28" rows="10" cols="50" style="width: 100%" placeholder="Review..."></textarea>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 20%; float: left; font-size: 1em; background-color: green; color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addReview(genre.results[4].id, genre.results[4].title, username, reviewText28)">Make Review</button>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 27.5%; float: left; font-size: 1em; background-color: rgb(230, 6, 43); color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addToFavourites(username, genre.results[4].id, genre.results[4].title, genre.results[4].poster_path, genre.results[4].release_date);
+        addToSearchHistory(genre.results[4].id, genre.results[4].title, genre.results[4].genre_ids[0], username)">Save to Favourites</button>
+        <a href="/#reviewsTable"><button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 40%; float: right; font-size: 1em; background-color: blue; color: white; font-family:Arial, Helvetica, sans-serif"
+        *ngIf="data" (click)="viewReviews(genre.results[4].id, genre.results[4].title)">Reviews for {{genre.results[4].title}}</button></a>
+        <button *ngIf="isPremium == true" class="btn btn-default" style="margin-top: 1em; margin-left: 1em; display: inline-block; width: 95%; float: left; font-size: 1em; background-color: rgb(0, 0, 0); color: white; font-family:Arial, Helvetica, sans-serif"
+        (click)="sendSmsMessage(username, genre.results[4].title, genre.results[4].release_date, genre.results[4].overview)">Send SMS with information for {{genre.results[4].title}}</button>
+        <br><br><br>
+        <p *ngIf="isPremium != true" style="font-size: 1.5em; color: goldenrod; text-align: center; background-color: white; border: .10em solid black; padding: 1em"><b>Go Premium to access SMS Functionality</b></p>
+    </td>
+</tr>
+
+<tr class="genreResultsTable">
+    <td class="dataFont" *ngIf="data"><b>{{genre.results[5].title}}</b><br> <img src="https://image.tmdb.org/t/p/w185/{{genre.results[5].poster_path}}" style="border:.10em solid black; margin-top: 1em"></td>
+    <td class="dataFont" *ngIf="data">{{genre.results[5].overview}}</td>
+    <td class="dataFont" *ngIf="data">{{genre.results[5].release_date}}</td>
+    <td *ngIf="isValid == true && accountExists == true"><h2 *ngIf="data" [(ngModel)]="movie_id" style="text-align: center"><b>Review {{genre.results[5].title}}</b></h2>
+        <textarea type="text" [(ngModel)]="reviewText29" rows="10" cols="50" style="width: 100%" placeholder="Review..."></textarea>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 20%; float: left; font-size: 1em; background-color: green; color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addReview(genre.results[5].id, genre.results[5].title, username, reviewText29)">Make Review</button>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 27.5%; float: left; font-size: 1em; background-color: rgb(230, 6, 43); color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addToFavourites(username, genre.results[5].id, genre.results[5].title, genre.results[5].poster_path, genre.results[5].release_date);
+        addToSearchHistory(genre.results[5].id, genre.results[5].title, genre.results[5].genre_ids[0], username)">Save to Favourites</button>
+        <a href="/#reviewsTable"><button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 40%; float: right; font-size: 1em; background-color: blue; color: white; font-family:Arial, Helvetica, sans-serif"
+        *ngIf="data" (click)="viewReviews(genre.results[5].id, genre.results[5].title)">Reviews for {{genre.results[5].title}}</button></a>
+        <button *ngIf="isPremium == true" class="btn btn-default" style="margin-top: 1em; margin-left: 1em; display: inline-block; width: 95%; float: left; font-size: 1em; background-color: rgb(0, 0, 0); color: white; font-family:Arial, Helvetica, sans-serif"
+        (click)="sendSmsMessage(username, genre.results[5].title, genre.results[5].release_date, genre.results[5].overview)">Send SMS with information for {{genre.results[5].title}}</button>
+        <br><br><br>
+        <p *ngIf="isPremium != true" style="font-size: 1.5em; color: goldenrod; text-align: center; background-color: white; border: .10em solid black; padding: 1em"><b>Go Premium to access SMS Functionality</b></p>
+    </td>
+</tr>
+
+<tr class="genreResultsTable">
+    <td class="dataFont" *ngIf="data"><b>{{genre.results[6].title}}</b><br> <img src="https://image.tmdb.org/t/p/w185/{{genre.results[6].poster_path}}" style="border:.10em solid black; margin-top: 1em"></td>
+    <td class="dataFont" *ngIf="data">{{genre.results[6].overview}}</td>
+    <td class="dataFont" *ngIf="data">{{genre.results[6].release_date}}</td>
+    <td *ngIf="isValid == true && accountExists == true"><h2 *ngIf="data" [(ngModel)]="movie_id" style="text-align: center"><b>Review {{genre.results[6].title}}</b></h2>
+        <textarea type="text" [(ngModel)]="reviewText30" rows="10" cols="50" style="width: 100%" placeholder="Review..."></textarea>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 20%; float: left; font-size: 1em; background-color: green; color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addReview(genre.results[6].id, genre.results[6].title, username, reviewText30)">Make Review</button>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 27.5%; float: left; font-size: 1em; background-color: rgb(230, 6, 43); color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addToFavourites(username, genre.results[6].id, genre.results[6].title, genre.results[6].poster_path, genre.results[6].release_date);
+        addToSearchHistory(genre.results[6].id, genre.results[6].title, genre.results[6].genre_ids[0], username)">Save to Favourites</button>
+        <a href="/#reviewsTable"><button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 40%; float: right; font-size: 1em; background-color: blue; color: white; font-family:Arial, Helvetica, sans-serif"
+        *ngIf="data" (click)="viewReviews(genre.results[6].id, genre.results[6].title)">Reviews for {{genre.results[6].title}}</button></a>
+        <button *ngIf="isPremium == true" class="btn btn-default" style="margin-top: 1em; margin-left: 1em; display: inline-block; width: 95%; float: left; font-size: 1em; background-color: rgb(0, 0, 0); color: white; font-family:Arial, Helvetica, sans-serif"
+        (click)="sendSmsMessage(username, genre.results[6].title, genre.results[6].release_date, genre.results[6].overview)">Send SMS with information for {{genre.results[6].title}}</button>
+        <br><br><br>
+        <p *ngIf="isPremium != true" style="font-size: 1.5em; color: goldenrod; text-align: center; background-color: white; border: .10em solid black; padding: 1em"><b>Go Premium to access SMS Functionality</b></p>
+    </td>
+</tr>
+
+<tr class="genreResultsTable">
+    <td class="dataFont" *ngIf="data"><b>{{genre.results[7].title}}</b><br> <img src="https://image.tmdb.org/t/p/w185/{{genre.results[7].poster_path}}" style="border:.10em solid black; margin-top: 1em"></td>
+    <td class="dataFont" *ngIf="data">{{genre.results[7].overview}}</td>
+    <td class="dataFont" *ngIf="data">{{genre.results[7].release_date}}</td>
+    <td *ngIf="isValid == true && accountExists == true"><h2 *ngIf="data" [(ngModel)]="movie_id" style="text-align: center"><b>Review {{genre.results[7].title}}</b></h2>
+        <textarea type="text" [(ngModel)]="reviewText31" rows="10" cols="50" style="width: 100%" placeholder="Review..."></textarea>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 20%; float: left; font-size: 1em; background-color: green; color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addReview(genre.results[7].id, genre.results[7].title, username, reviewText31)">Make Review</button>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 27.5%; float: left; font-size: 1em; background-color: rgb(230, 6, 43); color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addToFavourites(username, genre.results[7].id, genre.results[7].title, genre.results[7].poster_path, genre.results[7].release_date);
+        addToSearchHistory(genre.results[7].id, genre.results[7].title, genre.results[7].genre_ids[0], username)">Save to Favourites</button>
+        <a href="/#reviewsTable"><button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 40%; float: right; font-size: 1em; background-color: blue; color: white; font-family:Arial, Helvetica, sans-serif"
+        *ngIf="data" (click)="viewReviews(genre.results[7].id, genre.results[7].title)">Reviews for {{genre.results[7].title}}</button></a>
+        <button *ngIf="isPremium == true" class="btn btn-default" style="margin-top: 1em; margin-left: 1em; display: inline-block; width: 95%; float: left; font-size: 1em; background-color: rgb(0, 0, 0); color: white; font-family:Arial, Helvetica, sans-serif"
+        (click)="sendSmsMessage(username, genre.results[7].title, genre.results[7].release_date, genre.results[7].overview)">Send SMS with information for {{genre.results[7].title}}</button>
+        <br><br><br>
+        <p *ngIf="isPremium != true" style="font-size: 1.5em; color: goldenrod; text-align: center; background-color: white; border: .10em solid black; padding: 1em"><b>Go Premium to access SMS Functionality</b></p>
+    </td>
+</tr>
+
+<tr class="genreResultsTable">
+    <td class="dataFont" *ngIf="data"><b>{{genre.results[8].title}}</b><br> <img src="https://image.tmdb.org/t/p/w185/{{genre.results[8].poster_path}}" style="border:.10em solid black; margin-top: 1em"></td>
+    <td class="dataFont" *ngIf="data">{{genre.results[8].overview}}</td>
+    <td class="dataFont" *ngIf="data">{{genre.results[8].release_date}}</td>
+    <td *ngIf="isValid == true && accountExists == true"><h2 *ngIf="data" [(ngModel)]="movie_id" style="text-align: center"><b>Review {{genre.results[8].title}}</b></h2>
+        <textarea type="text" [(ngModel)]="reviewText32" rows="10" cols="50" style="width: 100%" placeholder="Review..."></textarea>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 20%; float: left; font-size: 1em; background-color: green; color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addReview(genre.results[8].id, genre.results[8].title, username, reviewText32)">Make Review</button>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 27.5%; float: left; font-size: 1em; background-color: rgb(230, 6, 43); color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addToFavourites(username, genre.results[8].id, genre.results[8].title, genre.results[8].poster_path, genre.results[8].release_date);
+        addToSearchHistory(genre.results[8].id, genre.results[8].title, genre.results[8].genre_ids[0], username)">Save to Favourites</button>
+        <a href="/#reviewsTable"><button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 40%; float: right; font-size: 1em; background-color: blue; color: white; font-family:Arial, Helvetica, sans-serif"
+        *ngIf="data" (click)="viewReviews(genre.results[8].id, genre.results[8].title)">Reviews for {{genre.results[8].title}}</button></a>
+        <button *ngIf="isPremium == true" class="btn btn-default" style="margin-top: 1em; margin-left: 1em; display: inline-block; width: 95%; float: left; font-size: 1em; background-color: rgb(0, 0, 0); color: white; font-family:Arial, Helvetica, sans-serif"
+        (click)="sendSmsMessage(username, genre.results[8].title, genre.results[8].release_date, genre.results[8].overview)">Send SMS with information for {{genre.results[8].title}}</button>
+        <br><br><br>
+        <p *ngIf="isPremium != true" style="font-size: 1.5em; color: goldenrod; text-align: center; background-color: white; border: .10em solid black; padding: 1em"><b>Go Premium to access SMS Functionality</b></p>
+    </td>
+</tr>
+
+<tr class="genreResultsTable">
+    <td class="dataFont" *ngIf="data"><b>{{genre.results[9].title}}</b><br> <img src="https://image.tmdb.org/t/p/w185/{{genre.results[9].poster_path}}" style="border:.10em solid black; margin-top: 1em"></td>
+    <td class="dataFont" *ngIf="data">{{genre.results[9].overview}}</td>
+    <td class="dataFont" *ngIf="data">{{genre.results[9].release_date}}</td>
+    <td *ngIf="isValid == true && accountExists == true"><h2 *ngIf="data" [(ngModel)]="movie_id" style="text-align: center"><b>Review {{genre.results[9].title}}</b></h2>
+        <textarea type="text" [(ngModel)]="reviewText33" rows="10" cols="50" style="width: 100%" placeholder="Review..."></textarea>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 20%; float: left; font-size: 1em; background-color: green; color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="checkForProfanity(genre.results[9].id, genre.results[9].title, username, reviewText33)">Make Review</button>
+        <button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 27.5%; float: left; font-size: 1em; background-color: rgb(230, 6, 43); color: white; font-family:Arial, Helvetica, sans-serif" 
+        *ngIf="data" (click)="addToFavourites(username, genre.results[9].id, genre.results[9].title, genre.results[9].poster_path, genre.results[9].release_date);
+        addToSearchHistory(genre.results[9].id, genre.results[9].title, genre.results[9].genre_ids[0], username)">Save to Favourites</button>
+        <a href="/#reviewsTable"><button class="btn btn-default" style="margin-left: 1em; display: inline-block; width: 40%; float: right; font-size: 1em; background-color: blue; color: white; font-family:Arial, Helvetica, sans-serif"
+        *ngIf="data" (click)="viewReviews(genre.results[9].id, genre.results[9].title)">Reviews for {{genre.results[9].title}}</button></a>
+        <button *ngIf="isPremium == true" class="btn btn-default" style="margin-top: 1em; margin-left: 1em; display: inline-block; width: 95%; float: left; font-size: 1em; background-color: rgb(0, 0, 0); color: white; font-family:Arial, Helvetica, sans-serif"
+        (click)="sendSmsMessage(username, genre.results[9].title, genre.results[9].release_date, genre.results[9].overview)">Send SMS with information for {{genre.results[9].title}}</button>
+        <br><br><br>
+        <p *ngIf="isPremium != true" style="font-size: 1.5em; color: goldenrod; text-align: center; background-color: white; border: .10em solid black; padding: 1em"><b>Go Premium to access SMS Functionality</b></p>
+    </td>
+</tr>
+  
+  </table>
+  </div>
+
+  <div id="genre"></div>
+
+  <script src="node_modules\bootstrap\js\dist\collapse.js"></script>
+  <script src="node_modules\bootstrap\js\src\dropdown.js"></script>
+  <script src="node_modules\bootstrap\dist\js\bootstrap.js"></script>
+  <script src="node_modules\bootstrap\dist\js\bootstrap.min.js"></script>
+
+</body>
+
+</html>

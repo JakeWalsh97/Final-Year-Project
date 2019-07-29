@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>QueryController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">movie-database-web-application</a> &gt; <a href="index.source.html" class="el_package">controller</a> &gt; <span class="el_source">QueryController.java</span></div><h1>QueryController.java</h1><pre class="source lang-java linenums">package controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import repository.QueryRepository;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+
+import static org.springframework.web.bind.annotation.RequestMethod.*;
+import static org.springframework.web.bind.annotation.RequestMethod.OPTIONS;
+
+@RestController
+@RequestMapping(&quot;/api&quot;)
+@CrossOrigin(origins=&quot;http://localhost:4200&quot;, allowedHeaders=&quot;*&quot;, methods = { GET, POST, PUT, DELETE, OPTIONS})
+public class QueryController {
+
+<span class="fc" id="L19">    public QueryController(QueryRepository queryRepository) {</span>
+<span class="fc" id="L20">        this.queryRepository = queryRepository;</span>
+<span class="fc" id="L21">    }</span>
+
+    @Autowired
+    QueryRepository queryRepository;
+
+    @GetMapping(&quot;/queries&quot;)
+    public List&lt;Query&gt; getQueries(){
+<span class="fc" id="L28">        return queryRepository.findAll();</span>
+    }
+
+    @GetMapping(&quot;/queries/{id}&quot;)
+    public Optional&lt;Query&gt; getQuery(@PathVariable Long id){
+<span class="fc" id="L33">        return queryRepository.findById(id);</span>
+    }
+
+    @DeleteMapping(&quot;/queries/{id}&quot;)
+    public boolean deleteQuery(@PathVariable Long id){
+<span class="fc" id="L38">        queryRepository.deleteById(id);</span>
+<span class="fc" id="L39">        return true;</span>
+    }
+
+    @PutMapping(&quot;/queries/update&quot;)
+    public Query updateQuery(@RequestBody Query query){
+<span class="nc" id="L44">        return queryRepository.save(query);</span>
+    }
+
+    @PostMapping(&quot;/queries/create&quot;)
+    public Query createQuery(@RequestBody Query query){
+<span class="fc" id="L49">        return queryRepository.save(query);</span>
+    }
+
+    @RequestMapping(&quot;/query/add&quot;)
+    public String addQuery(){
+<span class="fc" id="L54">        Query query = new Query(1, &quot;Jake&quot;, &quot;Problem with Favourites&quot;, &quot;Some of my favourite films are not loading when I click on the favourites button. Can you help me with this?&quot;, new Date(System.currentTimeMillis()), &quot;&quot;);</span>
+<span class="fc" id="L55">        queryRepository.save(query);</span>
+<span class="fc" id="L56">        return &quot;Query Successfully saved to the database&quot;;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

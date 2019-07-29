@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\main",
+    "\\src\\main\\java",
+    "\\src\\main\\resources",
+    "\\src\\main\\resources\\static",
+    "\\src\\main\\resources\\static\\RestClient",
+    "\\src\\main\\resources\\static\\RestClient\\e2e\\src"
+  ],
+  "SelectedNode": "\\src\\main\\resources\\application.properties",
+  "PreviewInSolutionExplorer": false
+}

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Query.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">movie-database-web-application</a> &gt; <a href="index.source.html" class="el_package">controller</a> &gt; <span class="el_source">Query.java</span></div><h1>Query.java</h1><pre class="source lang-java linenums">package controller;
+
+import lombok.Data;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import java.util.Date;
+
+<span class="pc bpc" id="L10" title="28 of 48 branches missed.">@Data</span>
+@Entity
+public class Query {
+
+    @Id
+    @GeneratedValue
+    public long id;
+    public String username;
+    public String queryTitle;
+    public String queryText;
+    public Date queryDate;
+    public String responseText;
+
+<span class="fc" id="L23">    public Query() {</span>
+<span class="fc" id="L24">    }</span>
+
+<span class="fc" id="L26">    public Query(long id, String username, String queryTitle, String queryText, Date queryDate, String responseText) {</span>
+<span class="fc" id="L27">        this.id = id;</span>
+<span class="fc" id="L28">        this.username = username;</span>
+<span class="fc" id="L29">        this.queryTitle = queryTitle;</span>
+<span class="fc" id="L30">        this.queryText = queryText;</span>
+<span class="fc" id="L31">        this.queryDate = queryDate;</span>
+<span class="fc" id="L32">        this.responseText = responseText;</span>
+<span class="fc" id="L33">    }</span>
+
+    public long getId() {
+<span class="fc" id="L36">        return id;</span>
+    }
+
+    public void setId(long id) {
+<span class="fc" id="L40">        this.id = id;</span>
+<span class="fc" id="L41">    }</span>
+
+    public String getUsername() {
+<span class="fc" id="L44">        return username;</span>
+    }
+
+    public void setUsername(String username) {
+<span class="fc" id="L48">        this.username = username;</span>
+<span class="fc" id="L49">    }</span>
+
+    public String getQueryTitle(){
+<span class="fc" id="L52">        return queryTitle;</span>
+    }
+
+    public void setQueryTitle(String queryTitle){
+<span class="fc" id="L56">        this.queryTitle = queryTitle;</span>
+<span class="fc" id="L57">    }</span>
+
+    public String getQueryText() {
+<span class="fc" id="L60">        return queryText;</span>
+    }
+
+    public void setQueryText(String queryText) {
+<span class="fc" id="L64">        this.queryText = queryText;</span>
+<span class="fc" id="L65">    }</span>
+
+    public Date getQueryDate() {
+<span class="fc" id="L68">        return queryDate;</span>
+    }
+
+    public void setQueryDate(Date queryDate) {
+<span class="fc" id="L72">        this.queryDate = queryDate;</span>
+<span class="fc" id="L73">    }</span>
+
+    public String getResponseText() {
+<span class="fc" id="L76">        return responseText;</span>
+    }
+
+    public void setResponseText(String responseText) {
+<span class="fc" id="L80">        this.responseText = responseText;</span>
+<span class="fc" id="L81">    }</span>
+
+    @Override
+    public String toString() {
+<span class="fc" id="L85">        return &quot;Query{&quot; +</span>
+                &quot;id=&quot; + id +
+                &quot;, username='&quot; + username + '\'' +
+                &quot;, queryTitle='&quot; + queryTitle + '\'' +
+                &quot;, queryText='&quot; + queryText + '\'' +
+                &quot;, queryDate=&quot; + queryDate +
+                &quot;, responseText='&quot; + responseText + '\'' +
+                '}';
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

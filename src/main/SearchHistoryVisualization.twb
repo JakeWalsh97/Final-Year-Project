@@ -1,0 +1,391 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 20182.18.0627.2230                               -->
+<workbook original-version='18.1' source-build='2018.2.0 (20182.18.0627.2230)' source-platform='win' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource caption='searchHistory (searchHistory)' inline='true' name='federated.1cozsia0j2w4851fgvcn10jo4zf1' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='searchHistory' name='excel-direct.0gezk831qcxp0i16c8j0v1t6oi7l'>
+            <connection class='excel-direct' cleaning='no' compat='no' dataRefreshTime='' filename='C:/Users/jakew/OneDrive/Desktop/College Year 4/4th-year-computing-project-JakeWalsh69/src/main/searchHistory.xlsx' interpretationMode='0' password='' server='' validate='no' />
+          </named-connection>
+        </named-connections>
+        <relation connection='excel-direct.0gezk831qcxp0i16c8j0v1t6oi7l' name='searchHistory' table='[searchHistory$]' type='table'>
+          <columns gridOrigin='A1:D18:no:A1:D18:0' header='yes' outcome='6'>
+            <column datatype='integer' name='ID' ordinal='0' />
+            <column datatype='integer' name='GENRE_ID' ordinal='1' />
+            <column datatype='integer' name='MOVIE_ID' ordinal='2' />
+            <column datatype='string' name='MOVIE_TITLE' ordinal='3' />
+          </columns>
+        </relation>
+        <metadata-records>
+          <metadata-record class='column'>
+            <remote-name>ID</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[ID]</local-name>
+            <parent-name>[searchHistory]</parent-name>
+            <remote-alias>ID</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>GENRE_ID</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[GENRE_ID]</local-name>
+            <parent-name>[searchHistory]</parent-name>
+            <remote-alias>GENRE_ID</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>MOVIE_ID</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[MOVIE_ID]</local-name>
+            <parent-name>[searchHistory]</parent-name>
+            <remote-alias>MOVIE_ID</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>MOVIE_TITLE</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[MOVIE_TITLE]</local-name>
+            <parent-name>[searchHistory]</parent-name>
+            <remote-alias>MOVIE_TITLE</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <collation flag='1' name='LEN_RGB_S2' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[searchHistory]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='integer' name='context'>0</attribute>
+              <attribute datatype='string' name='gridOrigin'>&quot;A1:D18:no:A1:D18:0&quot;</attribute>
+              <attribute datatype='boolean' name='header'>true</attribute>
+              <attribute datatype='integer' name='outcome'>6</attribute>
+            </attributes>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='Genre Id' datatype='integer' name='[GENRE_ID]' role='dimension' type='ordinal'>
+        <aliases>
+          <alias key='18' value='Drama' />
+          <alias key='28' value='Action' />
+          <alias key='36' value='History' />
+          <alias key='53' value='Thriller' />
+          <alias key='10751' value='Family' />
+        </aliases>
+      </column>
+      <column datatype='integer' name='[ID]' role='dimension' type='ordinal' />
+      <column caption='Movie Id' datatype='integer' name='[MOVIE_ID]' role='dimension' type='ordinal' />
+      <column aggregation='CountD' caption='Movie Title' datatype='string' default-role='measure' default-type='quantitative' name='[MOVIE_TITLE]' role='dimension' type='nominal' />
+      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+        <calculation class='tableau' formula='1' />
+      </column>
+      <column-instance column='[GENRE_ID]' derivation='None' name='[none:GENRE_ID:ok]' pivot='key' type='ordinal' />
+      <layout dim-ordering='alphabetic' dim-percentage='0.540302' measure-ordering='alphabetic' measure-percentage='0.459698' show-structure='true' />
+      <style>
+        <style-rule element='mark'>
+          <encoding attr='color' field='[none:GENRE_ID:ok]' type='palette'>
+            <map to='#2ca02c'>
+              <bucket>18</bucket>
+            </map>
+            <map to='#98df8a'>
+              <bucket>28</bucket>
+            </map>
+            <map to='#d62728'>
+              <bucket>10751</bucket>
+            </map>
+            <map to='#dbdb8d'>
+              <bucket>36</bucket>
+            </map>
+            <map to='#ff7f0e'>
+              <bucket>53</bucket>
+            </map>
+          </encoding>
+        </style-rule>
+      </style>
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;Ireland&quot;' />
+      </semantic-values>
+      <date-options start-of-week='monday' />
+    </datasource>
+  </datasources>
+  <worksheets>
+    <worksheet name='Sheet 1'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='searchHistory (searchHistory)' name='federated.1cozsia0j2w4851fgvcn10jo4zf1' />
+          </datasources>
+          <datasource-dependencies datasource='federated.1cozsia0j2w4851fgvcn10jo4zf1'>
+            <column caption='Genre Id' datatype='integer' name='[GENRE_ID]' role='dimension' type='ordinal'>
+              <aliases>
+                <alias key='18' value='Drama' />
+                <alias key='28' value='Action' />
+                <alias key='36' value='History' />
+                <alias key='53' value='Thriller' />
+                <alias key='10751' value='Family' />
+              </aliases>
+            </column>
+            <column aggregation='CountD' caption='Movie Title' datatype='string' default-role='measure' default-type='quantitative' name='[MOVIE_TITLE]' role='dimension' type='nominal' />
+            <column-instance column='[MOVIE_TITLE]' derivation='CountD' name='[ctd:MOVIE_TITLE:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[GENRE_ID]' derivation='None' name='[none:GENRE_ID:ok]' pivot='key' type='ordinal' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <format attr='title' class='0' field='[federated.1cozsia0j2w4851fgvcn10jo4zf1].[ctd:MOVIE_TITLE:qk]' scope='rows' value='Movie Count' />
+          </style-rule>
+          <style-rule element='label'>
+            <format attr='text-orientation' field='[federated.1cozsia0j2w4851fgvcn10jo4zf1].[none:GENRE_ID:ok]' value='0' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.1cozsia0j2w4851fgvcn10jo4zf1].[none:GENRE_ID:ok]' />
+              <text column='[federated.1cozsia0j2w4851fgvcn10jo4zf1].[none:GENRE_ID:ok]' />
+            </encodings>
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='true' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>[federated.1cozsia0j2w4851fgvcn10jo4zf1].[ctd:MOVIE_TITLE:qk]</rows>
+        <cols>[federated.1cozsia0j2w4851fgvcn10jo4zf1].[none:GENRE_ID:ok]</cols>
+        <mark-labels>
+          <mark-label id='0' label-state='off'>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.1cozsia0j2w4851fgvcn10jo4zf1].[none:GENRE_ID:ok]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.1cozsia0j2w4851fgvcn10jo4zf1].[ctd:MOVIE_TITLE:qk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.1cozsia0j2w4851fgvcn10jo4zf1].[ctd:MOVIE_TITLE:qk]</field>
+                  <field>[federated.1cozsia0j2w4851fgvcn10jo4zf1].[none:GENRE_ID:ok]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>1</value>
+                <value>10751</value>
+              </tuple>
+            </tuple-reference>
+          </mark-label>
+          <mark-label id='1' label-state='off'>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.1cozsia0j2w4851fgvcn10jo4zf1].[none:GENRE_ID:ok]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.1cozsia0j2w4851fgvcn10jo4zf1].[ctd:MOVIE_TITLE:qk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.1cozsia0j2w4851fgvcn10jo4zf1].[ctd:MOVIE_TITLE:qk]</field>
+                  <field>[federated.1cozsia0j2w4851fgvcn10jo4zf1].[none:GENRE_ID:ok]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>1</value>
+                <value>53</value>
+              </tuple>
+            </tuple-reference>
+          </mark-label>
+          <mark-label id='2' label-state='off'>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.1cozsia0j2w4851fgvcn10jo4zf1].[none:GENRE_ID:ok]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.1cozsia0j2w4851fgvcn10jo4zf1].[ctd:MOVIE_TITLE:qk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.1cozsia0j2w4851fgvcn10jo4zf1].[ctd:MOVIE_TITLE:qk]</field>
+                  <field>[federated.1cozsia0j2w4851fgvcn10jo4zf1].[none:GENRE_ID:ok]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>2</value>
+                <value>36</value>
+              </tuple>
+            </tuple-reference>
+          </mark-label>
+          <mark-label id='3' label-state='off'>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.1cozsia0j2w4851fgvcn10jo4zf1].[none:GENRE_ID:ok]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.1cozsia0j2w4851fgvcn10jo4zf1].[ctd:MOVIE_TITLE:qk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.1cozsia0j2w4851fgvcn10jo4zf1].[ctd:MOVIE_TITLE:qk]</field>
+                  <field>[federated.1cozsia0j2w4851fgvcn10jo4zf1].[none:GENRE_ID:ok]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>4</value>
+                <value>28</value>
+              </tuple>
+            </tuple-reference>
+          </mark-label>
+          <mark-label id='4' label-state='off'>
+            <tuple-reference>
+              <tuple-descriptor>
+                <pane-descriptor>
+                  <x-fields>
+                    <field>[federated.1cozsia0j2w4851fgvcn10jo4zf1].[none:GENRE_ID:ok]</field>
+                  </x-fields>
+                  <y-fields>
+                    <field>[federated.1cozsia0j2w4851fgvcn10jo4zf1].[ctd:MOVIE_TITLE:qk]</field>
+                  </y-fields>
+                </pane-descriptor>
+                <columns>
+                  <field>[federated.1cozsia0j2w4851fgvcn10jo4zf1].[ctd:MOVIE_TITLE:qk]</field>
+                  <field>[federated.1cozsia0j2w4851fgvcn10jo4zf1].[none:GENRE_ID:ok]</field>
+                </columns>
+              </tuple-descriptor>
+              <tuple>
+                <value>9</value>
+                <value>18</value>
+              </tuple>
+            </tuple-reference>
+          </mark-label>
+        </mark-labels>
+      </table>
+    </worksheet>
+  </worksheets>
+  <windows source-height='30'>
+    <window class='worksheet' maximized='true' name='Sheet 1'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.1cozsia0j2w4851fgvcn10jo4zf1].[none:GENRE_ID:ok]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[federated.1cozsia0j2w4851fgvcn10jo4zf1].[none:GENRE_ID:ok]</field>
+            <field>[federated.1cozsia0j2w4851fgvcn10jo4zf1].[none:MOVIE_TITLE:nk]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+    </window>
+  </windows>
+  <thumbnails>
+    <thumbnail height='192' name='Sheet 1' width='192'>
+      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
+      RU5ErkJggg==
+    </thumbnail>
+  </thumbnails>
+</workbook>

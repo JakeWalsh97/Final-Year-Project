@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SearchHistoryController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">movie-database-web-application</a> &gt; <a href="index.source.html" class="el_package">controller</a> &gt; <span class="el_source">SearchHistoryController.java</span></div><h1>SearchHistoryController.java</h1><pre class="source lang-java linenums">package controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import repository.SearchHistoryRepository;
+
+import java.util.List;
+import java.util.Optional;
+
+import static org.springframework.web.bind.annotation.RequestMethod.*;
+import static org.springframework.web.bind.annotation.RequestMethod.OPTIONS;
+
+@RestController
+@RequestMapping(&quot;/api&quot;)
+@CrossOrigin(origins=&quot;http://localhost:4200&quot;, allowedHeaders=&quot;*&quot;, methods = { GET, POST, PUT, DELETE, OPTIONS})
+public class SearchHistoryController {
+
+<span class="fc" id="L18">    public SearchHistoryController(SearchHistoryRepository searchHistoryRepository) {</span>
+<span class="fc" id="L19">        this.searchHistoryRepository = searchHistoryRepository;</span>
+<span class="fc" id="L20">    }</span>
+
+    @Autowired
+    SearchHistoryRepository searchHistoryRepository;
+
+    @GetMapping(&quot;/searchHistory&quot;)
+    public List&lt;SearchHistory&gt; getAllSearchHistory() {
+<span class="fc" id="L27">        return searchHistoryRepository.findAll();</span>
+    }
+
+    @GetMapping(&quot;/searchHistory/{id}&quot;)
+    public Optional&lt;SearchHistory&gt; getSearchHistory(@PathVariable Long id){
+<span class="fc" id="L32">        return searchHistoryRepository.findById(id);</span>
+    }
+
+    @DeleteMapping(&quot;/searchHistory/{id}&quot;)
+    public boolean deleteSearchHistory(@PathVariable Long id) {
+<span class="fc" id="L37">        searchHistoryRepository.deleteById(id);</span>
+<span class="fc" id="L38">        return true;</span>
+    }
+
+    @PutMapping(&quot;/searchHistory/update&quot;)
+    public SearchHistory updateSearchHistory(@RequestBody SearchHistory searchHistory) {
+<span class="nc" id="L43">        return searchHistoryRepository.save(searchHistory);</span>
+    }
+
+    @PostMapping(&quot;/searchHistory/create&quot;)
+    public SearchHistory createSearchHistory(@RequestBody SearchHistory searchHistory) {
+<span class="fc" id="L48">        return searchHistoryRepository.save(searchHistory);</span>
+    }
+
+    @RequestMapping(&quot;/searchHistory/add&quot;)
+    public String addSearchHistory(){
+<span class="fc" id="L53">        SearchHistory searchHistory = new SearchHistory(1, 505954, &quot;T-34&quot;, 10752, &quot;TestUser&quot;);</span>
+<span class="fc" id="L54">        searchHistoryRepository.save(searchHistory);</span>
+<span class="fc" id="L55">        return &quot;Search History successfully saved to the database&quot;;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

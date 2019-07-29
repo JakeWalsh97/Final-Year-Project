@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ReviewController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">movie-database-web-application</a> &gt; <a href="index.source.html" class="el_package">controller</a> &gt; <span class="el_source">ReviewController.java</span></div><h1>ReviewController.java</h1><pre class="source lang-java linenums">package controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import repository.ReviewRepository;
+
+import java.util.List;
+import java.util.Optional;
+
+import static org.springframework.web.bind.annotation.RequestMethod.*;
+import static org.springframework.web.bind.annotation.RequestMethod.OPTIONS;
+
+@RestController
+@RequestMapping(&quot;/api&quot;)
+@CrossOrigin(origins=&quot;http://localhost:4200&quot;, allowedHeaders=&quot;*&quot;, methods = { GET, POST, PUT, DELETE, OPTIONS})
+public class ReviewController {
+
+<span class="fc" id="L18">    public ReviewController(ReviewRepository reviewRepository) {</span>
+<span class="fc" id="L19">        this.reviewRepository = reviewRepository;</span>
+<span class="fc" id="L20">    }</span>
+
+    @Autowired
+    ReviewRepository reviewRepository;
+
+    @GetMapping(&quot;/reviews&quot;)
+    public List&lt;Review&gt; getReviews(){
+<span class="fc" id="L27">        return reviewRepository.findAll();</span>
+    }
+
+    @GetMapping(&quot;/review/{id}&quot;)
+    public Optional&lt;Review&gt; getReview(@PathVariable Long id){
+<span class="fc" id="L32">        return reviewRepository.findById(id);</span>
+    }
+
+    @DeleteMapping(&quot;/review/{id}&quot;)
+    public boolean deleteReview(@PathVariable Long id){
+<span class="fc" id="L37">        reviewRepository.deleteById(id);</span>
+<span class="fc" id="L38">        return true;</span>
+    }
+
+    @PutMapping(&quot;/review/update&quot;)
+    public Review updateReview(@RequestBody Review review){
+<span class="nc" id="L43">        return reviewRepository.save(review);</span>
+    }
+
+    @PostMapping(&quot;/review/create&quot;)
+    public Review createReview(@RequestBody Review review){
+<span class="fc" id="L48">        return reviewRepository.save(review);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

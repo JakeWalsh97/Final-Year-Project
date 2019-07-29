@@ -1,0 +1,12 @@
+controller\ReviewTest.class
+controller\FavouriteControllerTest.class
+controller\FavouriteTest.class
+controller\SearchHistoryControllerTest.class
+controller\UserControllerTest.class
+controller\UserTest.class
+controller\SearchHistoryTest.class
+controller\QueryControllerTest.class
+controller\QueryTest.class
+controller\SmsMessageControllerTest.class
+controller\ReviewControllerTest.class
+controller\SmsMessageTest.class
